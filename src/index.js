@@ -2,7 +2,8 @@ import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import UIFilters from './UIFilters';
-
+require('../vendors.css');
+require('../main.css');
 require('./style/layout.sass');
 require('./style/filter.sass');
 
@@ -125,58 +126,58 @@ const state = {
     domInt: {
       values: [
         {
-          name: 'Domestic'
+          name: 'domestic'
         },
         {
-          name: 'International'
+          name: 'international'
         }
       ]
     },
     corporations: {
       values: [
         {
-          name: 'Corporations'
+          name: 'corporations'
         },
         {
-          name: 'Non-corporations'
+          name: 'non-corporations'
         }
       ]
     },
     financial: {
       values: [
         {
-          name: 'Financial'
+          name: 'financial'
         },
         {
-          name: 'Non-financial'
+          name: 'non-financial'
         }
       ]
     },
     government: {
       values: [
         {
-          name: 'Government'
+          name: 'true'
         },
         {
-          name: 'Non-government'
+          name: 'false'
         }
       ]
     },
     liquidity: {
       values: [
-        {name: 'Non liquid'},
-        {name: 'Low liquidity'},
-        {name: 'Average liquidity'},
-        {name: 'High liquidity'},
-        {name: 'Very high liquidity'}
+        {name: 'non-liquid'},
+        {name: 'low'},
+        {name: 'average'},
+        {name: 'high'},
+        {name: 'very high'}
       ]
     },
     type: {
       values: [
-        {name: 'Regular'},
-        {name: 'Subordinated'},
-        {name: 'Floater'},
-        {name: 'Convertible'}
+        {name: 'regular'},
+        {name: 'subord'},
+        {name: 'floater'},
+        {name: 'convertible'}
       ]
     },
     duration: {
