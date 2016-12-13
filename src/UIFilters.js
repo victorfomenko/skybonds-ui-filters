@@ -14,8 +14,16 @@ class UIFilters extends Component {
     super(props);
     this.state = {
       filters: this.props.filters || {}
+    };
+    this._initEEListeners();
+  }
+
+  _initEEListeners(){
+    if(typeof this.props.ee.on === 'function'){
+      this.props.ee.on('render', this.render.bind(this))
     }
   }
+
 
   _getStateObj () {
     var selected = {};
@@ -124,6 +132,7 @@ class UIFilters extends Component {
 }
 
 UIFilters.propTypes = {
+  ee: React.PropTypes.func,
   filters: React.PropTypes.object.isRequired,
   onStateChange: React.PropTypes.func.isRequired
 };
