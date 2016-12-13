@@ -21,7 +21,6 @@ class FilterListItem extends Component {
                  onChange={this._onChange}
                  id={this.props.id}
                  checked={this.props.selected ? 'checked' : ''}
-                 disabled={this.props.disabled ? 'disabled' : ''}
           />
           <label className={`filter__dropdown-label ${this.props.disabled ? 'filter__dropdown-label_disabled' : '' }`} htmlFor={this.props.id}>
             <span>{this.props.name}</span>
