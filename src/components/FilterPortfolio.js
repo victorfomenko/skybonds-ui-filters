@@ -14,20 +14,18 @@ class FilterPortfolio extends FilterComponent {
 
   render() {
     var portfolioList;
-    if(this._portfolio.visible){
-      portfolioList = this._portfolio.values.map((item, index) => {
-        return <FilterListItem
-          key={index}
-          name={item.name}
-          id={`country-${item.name}-${index}`}
-          selected={item.selected}
-          disabled={item.disabled}
-          onChange={ (value) => {
-            this.props.portfolio.values[index].selected = value;
-            this.props.onChange(this.props.portfolio)
-          }} />
-      });
-    }
+    portfolioList = this._portfolio.values.map((item, index) => {
+      return <FilterListItem
+        key={index}
+        name={item.name}
+        id={`country-${item.name}-${index}`}
+        selected={item.selected}
+        disabled={item.disabled}
+        onChange={ (value) => {
+          this.props.portfolio.values[index].selected = value;
+          this.props.onChange(this.props.portfolio)
+        }} />
+    });
     return (
       <div>
         {portfolioList}
