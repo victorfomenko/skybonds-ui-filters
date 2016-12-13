@@ -2,8 +2,7 @@ import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import UIFilters from './UIFilters';
-require('../vendors.css');
-require('../main.css');
+
 require('./style/layout.sass');
 require('./style/filter.sass');
 
@@ -183,6 +182,12 @@ const state = {
     duration: {
       from: '',
       to: ''
+    },
+    portfolio: {
+      values: [
+        {name: 'Portfolio'},
+      ],
+      visible: true
     }
   }
 };
