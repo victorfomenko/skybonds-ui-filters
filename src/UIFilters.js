@@ -6,6 +6,7 @@ import FilterCurrency from './components/FilterCurrency'
 import FilterSector from './components/FilterSector'
 import FilterLiquidity from './components/FilterLiquidity'
 import FilterType from './components/FilterType'
+import FilterPortfolio from './components/FilterPortfolio'
 
 
 class UIFilters extends Component {
@@ -122,6 +123,14 @@ class UIFilters extends Component {
           type={this.state.filters.type || {}}
           onChange={ (currency) => {
               this.props.filters.type = currency;
+              this.setState({filters: this.props.filters})
+            }
+          }
+        />
+        <FilterPortfolio
+          portfolio={this.state.filters.portfolio || {}}
+          onChange={ (portfolio) => {
+              this.props.filters.portfolio = portfolio;
               this.setState({filters: this.props.filters})
             }
           }
