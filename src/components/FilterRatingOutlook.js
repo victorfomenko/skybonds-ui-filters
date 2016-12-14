@@ -51,12 +51,14 @@ class FilterRatingOutlook extends FilterComponent {
 
   getOutlookList () {
     return this._outlook.values.map((item, index) => {
+      var name = this._mapOutlook(item.name);
       return <FilterListItem
           key={item.name}
           id={`outlook-${item.name}-${index}`}
           selected={item.selected}
-          name={item.name}
+          name={name}
           disabled={item.disabled}
+          tag={item.tag}
           onChange={ (value) => {
           this.props.outlook.values[index].selected = value;
           this.props.onChange({outlook: this.props.outlook})
@@ -103,6 +105,7 @@ class FilterRatingOutlook extends FilterComponent {
             selected={item.selected}
             disabled={item.disabled}
             color={item.color}
+            tag={item.tag}
             onChange={ (value) => {
           for(var i=0; i<this.props.rating.values.length; i++){
             if (this.props.rating.values[i].name == item.name){
@@ -154,6 +157,16 @@ class FilterRatingOutlook extends FilterComponent {
 
   }
 
+  _mapOutlook(value){
+    const lables = {
+      'na': 'NA',
+      'negative': 'Negative',
+      'stable': 'Stable',
+      'positive': 'Positive'
+    };
+    if(lables[value] != null) { return lables[value] }
+    return value
+  }
 
   content() {
     this._sortCollections();

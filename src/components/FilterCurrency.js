@@ -29,6 +29,7 @@ class FilterCurrency extends FilterComponent {
         id={`country-${item.name}-${index}`}
         selected={item.selected}
         disabled={item.disabled}
+        tag={item.tag}
         onChange={ (value) => {
           this.props.currency.values[index].selected = value;
           this.props.onChange(this.props.currency)

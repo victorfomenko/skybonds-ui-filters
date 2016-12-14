@@ -19,16 +19,27 @@ class FilterCountry extends FilterComponent {
     this._country.values.sort(this.props.country.sortStrategy)
   }
 
+  _map(value){
+    const lables = {
+      'RUS': 'Russia',
+      'USA': 'United Sates',
+      'GBR': 'Great Britain'
+    };
+    if(lables[value] != null) { return lables[value] }
+    return value
+  }
 
   content() {
     this._sortCollection();
     var countriesList = this._country.values.map((item, index) => {
+      var name = this._map(item.name);
       return <FilterListItem
         key={index}
         id={`country-${item.name}-${index}`}
-        name={item.name}
+        name={name}
         selected={item.selected}
         disabled={item.disabled}
+        tag={item.tag}
         onChange={ (value) => {
           this.props.country.values[index].selected = value;
           this.props.onChange(this.props.country)

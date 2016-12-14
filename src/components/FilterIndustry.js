@@ -27,6 +27,7 @@ class FilterIndustry extends FilterComponent {
         name={item.name}
         selected={item.selected}
         disabled={item.disabled}
+        tag={item.tag}
         onChange={ (value) => {
           this.props.industry.values[index].selected = value;
           this.props.onChange(this.props.industry)

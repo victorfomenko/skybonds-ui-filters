@@ -73,7 +73,7 @@
   vertical-align: middle
 
 
-  
+
 .filter__dropdown
   display: none
   position: absolute
@@ -171,7 +171,6 @@
 
   &.filter__dropdown-label_disabled
     color: #999999
-    cursor: default
 
     &:hover
       background-color: transparent
@@ -179,6 +178,21 @@
     &:before
       border-color: rgba(133, 133, 133, 0.5)
 
+
+.filter__dropdown-tag
+  display: inline-block
+  padding: .25em .4em
+  font-size: 75%
+  line-height: 1
+  color: #999999
+  text-align: center
+  white-space: nowrap
+  vertical-align: 1px
+  border-radius: .25rem
+  margin-left: 7px
+
+  &:empty
+    display: none
 
 .filter__dropdown-text
   margin-right: 34px
@@ -189,6 +203,13 @@
   margin: 9px 0
   overflow: hidden
   background-color: #e5e5e5
+
+.close_icon
+  padding-top: 5px
+  & a
+    color: #000000
+    text-decoration: none
+
 
 .filters_rating
   .filter__dropdown-menu

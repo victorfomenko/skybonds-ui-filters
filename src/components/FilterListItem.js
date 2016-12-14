@@ -49,10 +49,10 @@ class FilterListItem extends Component {
                  onChange={this._onChange}
                  id={this.props.id}
                  checked={this.props.selected ? 'checked' : ''}
-                 disabled={this.props.disabled ? 'disabled' : ''}
           />
           <label style={this._style()} className={`filter__dropdown-label ${this.props.disabled ? 'filter__dropdown-label_disabled' : '' }`} htmlFor={this.props.id}>
             <span>{this.props.name}</span>
+            <span className="filter__dropdown-tag">{this.props.tag}</span>
           </label>
         </div>
       </li>

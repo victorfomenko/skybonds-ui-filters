@@ -15,7 +15,6 @@ class FilterListItemAll extends FilterListItemAllAbstract {
                    type="checkbox"
                    id={this.props.name}
                    checked={this._isAllChecked() ? 'checked' : ''}
-                   disabled={this._isDisabled() ? 'disabled' : ''}
             />
             <label className={`filter__dropdown-label ${this._isDisabled() ? 'filter__dropdown-label_disabled' : '' }`} htmlFor={this.props.name}>
               <span>{this.props.name}</span>

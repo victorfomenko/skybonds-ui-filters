@@ -18,15 +18,30 @@ class FilterType extends FilterComponent {
     this._type.values.sort(this.props.type.sortStrategy)
   }
 
+
+  _map(value){
+    const lables = {
+      'convertible': 'Convertibles',
+      'floater': 'Floaters',
+      'regular': 'Regular bonds',
+      'subord': 'Subordinated'
+    };
+    if(lables[value] != null) { return lables[value] }
+    return value
+  }
+
+
   content() {
     this._sortCollection();
     var typesList = this._type.values.map((item, index) => {
+      var name = this._map(item.name);
       return <FilterListItem
         key={index}
-        name={item.name}
+        name={name}
         id={`country-${item.name}-${index}`}
         selected={item.selected}
         disabled={item.disabled}
+        tag={item.tag}
         onChange={ (value) => {
           this.props.type.values[index].selected = value;
           this.props.onChange(this.props.type)

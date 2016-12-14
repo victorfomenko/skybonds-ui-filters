@@ -18,15 +18,29 @@ class FilterLiquidity extends FilterComponent {
     this._liquidity.values.sort(this.props.liquidity.sortStrategy)
   }
 
+  _map(value){
+    const lables = {
+      'very high': 'Very high liquidity',
+      'high': 'High liquidity',
+      'average': 'Average liquidity',
+      'low': 'Low liquidity',
+      'non-liquid': 'Non-liquid',
+    };
+    if(lables[value] != null) { return lables[value] }
+    return value
+  }
+
   content() {
     this._sortCollection();
     var liquiditiesList = this._liquidity.values.map((item, index) => {
+      var name = this._map(item.name);
       return <FilterListItem
         key={index}
-        name={item.name}
+        name={name}
         id={`country-${item.name}-${index}`}
         selected={item.selected}
         disabled={item.disabled}
+        tag={item.tag}
         onChange={ (value) => {
           this.props.liquidity.values[index].selected = value;
           this.props.onChange(this.props.liquidity)
