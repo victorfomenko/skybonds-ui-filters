@@ -147,9 +147,6 @@ class UIFilters extends Component {
             }
           }
         />
-        <div className="close_icon">
-          <a href="javascript:void(0)" onClick={this._resetFilterState.bind(this)}>✕</a>
-        </div>
       </div>
     );
   }
