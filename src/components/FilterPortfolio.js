@@ -26,9 +26,14 @@ class FilterPortfolio extends FilterComponent {
           this.props.onChange(this.props.portfolio)
         }} />
     });
+
     return (
-      <div>
-        {portfolioList}
+      <div className={`filter ${this._isSelected() ? 'filter_selected' : ''}`}>
+        <div className="filter__container filter__container_single">
+          <ul>
+            {portfolioList}
+          </ul>
+        </div>
       </div>
     )
   }
