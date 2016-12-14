@@ -51,6 +51,28 @@ class UIFilters extends Component {
     this.props.onStateChange(this._getStateObj());
   }
 
+  resetFilterState(){
+    var selected = {};
+    for(const key in this.state.filters){
+      var activeValues = [];
+      if(Object.prototype.toString.call(this.state.filters[key].values) === '[object Array]' ) {
+        this.state.filters[key].values.forEach( (value) => {
+          if(value.selected){
+            value.selected = false
+            activeValues.push(value);
+          }
+        });
+      }
+      if(activeValues.length > 0) {
+        selected[key] = activeValues;
+      }
+    }
+    this.setState({
+      all: this.state.filters,
+      selected
+    });
+  }
+
 
   render(){
     return (
@@ -127,6 +149,9 @@ class UIFilters extends Component {
             }
           }
         />
+        <div className="close_icon">
+          <a href="javascript:void(0)" onClick={this.resetFilterState.bind(this)}>✕</a>
+        </div>
       </div>
     );
   }
