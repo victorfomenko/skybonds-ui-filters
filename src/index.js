@@ -182,11 +182,6 @@ const state = {
     duration: {
       from: '',
       to: ''
-    },
-    portfolio: {
-      values: [
-        {name: 'Portfolio'},
-      ]
     }
   }
 };

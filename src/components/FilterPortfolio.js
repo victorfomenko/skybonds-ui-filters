@@ -14,6 +14,7 @@ class FilterPortfolio extends FilterComponent {
 
   render() {
     var portfolioList;
+    var portfolioWrapper;
     portfolioList = this._portfolio.values.map((item, index) => {
       return <FilterListItem
         key={index}
@@ -26,14 +27,18 @@ class FilterPortfolio extends FilterComponent {
           this.props.onChange(this.props.portfolio)
         }} />
     });
-
-    return (
-      <div className={`filter ${this._isSelected() ? 'filter_selected' : ''}`}>
+    if(this._portfolio.values.length > 0) {
+      portfolioWrapper =
         <div className="filter__container filter__container_single">
           <ul>
             {portfolioList}
           </ul>
         </div>
+    }
+
+    return (
+      <div className={`filter ${this._isSelected() ? 'filter_selected' : ''}`}>
+        {portfolioWrapper}
       </div>
     )
   }
