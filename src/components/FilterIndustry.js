@@ -11,6 +11,7 @@ class FilterIndustry extends FilterComponent {
     this._industry = this.props.industry;
     this.initValues(this.props.industry.values);
     this.initFilterName('Industry');
+    this.prefixName = 'filters_industry';
   }
 
   _sortCollection(){
@@ -44,7 +45,12 @@ class FilterIndustry extends FilterComponent {
             this.props.industry.values = values;
             this.props.onChange(this.props.industry);
           }} />
-        {countriesList}
+
+        <li>
+          <ul className="filter__dropdown-columns">
+            {countriesList}
+          </ul>
+        </li>
       </ul>
     )
   }
