@@ -24,6 +24,7 @@ class FilterListItem extends Component {
           />
           <label className={`filter__dropdown-label ${this.props.disabled ? 'filter__dropdown-label_disabled' : '' }`} htmlFor={this.props.id}>
             <span>{this.props.name}</span>
+            <span className="filter__dropdown-tag">{this.props.tag}</span>
           </label>
         </div>
       </li>

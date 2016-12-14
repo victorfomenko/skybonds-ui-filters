@@ -13,14 +13,14 @@ const state = {
         {name:'ITL'},
         {name:'NZD'},
         {name:'HUF'},
-        {name:'ILS', selected: true},
+        {name:'ILS', selected: true, tag: '123'},
         {name:'CLP'},
         {name:'ZAR'},
         {name:'CRC'},
         {name:'JMD'},
         {name:'TRY', disabled: true},
         {name:'KZT'},
-        {name:'DOP'},
+        {name:'DOP', tag: '1235', selected: true},
         {name:'COP'},
         {name:'CAD'},
         {name:'KRW'},
@@ -58,7 +58,8 @@ const state = {
           selected: true
         },
         {
-          name: 'B+'
+          name: 'B+',
+          tag: '1235'
         },
         {
           name: 'A-'

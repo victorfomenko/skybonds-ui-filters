@@ -90,6 +90,7 @@ class FilterSector extends FilterComponent {
         selected={item.selected}
         name={name}
         disabled={item.disabled}
+        tag={item.tag}
         onChange={ (value) => {
           this.props.financial.values[index].selected = value;
           this.props.onChange({financial: this.props.financial})
@@ -105,6 +106,7 @@ class FilterSector extends FilterComponent {
           selected={item.selected}
           name={name}
           disabled={item.disabled}
+          tag={item.tag}
           onChange={ (value) => {
             this.props.government.values[index].selected = value;
             this.props.onChange({government: this.props.government})

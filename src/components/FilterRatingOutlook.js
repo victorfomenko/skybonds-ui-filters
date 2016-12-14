@@ -48,6 +48,7 @@ class FilterRatingOutlook extends FilterComponent {
         name={item.name}
         selected={item.selected}
         disabled={item.disabled}
+        tag={item.tag}
         onChange={ (value) => {
           this.props.rating.values[index].selected = value;
           this.props.onChange({rating: this.props.rating})
@@ -61,6 +62,7 @@ class FilterRatingOutlook extends FilterComponent {
         selected={item.selected}
         name={name}
         disabled={item.disabled}
+        tag={item.tag}
         onChange={ (value) => {
           this.props.outlook.values[index].selected = value;
           this.props.onChange({outlook: this.props.outlook})
