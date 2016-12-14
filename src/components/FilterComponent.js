@@ -6,6 +6,7 @@ export default class FilterComponent extends Component {
     super(props);
     this.__values = [];
     this.__filterName = 'Filter'
+    this.prefixName = ''
   }
 
 
@@ -52,7 +53,7 @@ export default class FilterComponent extends Component {
 
   render(){
     return(
-      <div className={`filter ${this._isDisabled() ? 'filter_disabled' : ''} ${this._isSelected() ? 'filter_selected' : ''}`}>
+      <div className={`filter ${this._isDisabled() ? 'filter_disabled' : ''} ${this._isSelected() ? 'filter_selected' : ''} ${this.prefixName}`}>
         <div className="filter__container">
           <button type="button" className="filter__button">
             <span className="filter__name">{this.__filterName}</span>
