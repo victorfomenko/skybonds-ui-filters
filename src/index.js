@@ -2,6 +2,8 @@ import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import UIFilters from './UIFilters';
+require('./style/layout.sass');
+require('./style/filter.sass');
 
 const rootEl = document.getElementById('root');
 const state = {
