@@ -37,7 +37,7 @@ class FilterPortfolio extends FilterComponent {
     }
 
     return (
-      <div className={`filter ${this._isSelected() ? 'filter_selected' : ''}`}>
+      <div className={`${portfolioList.length > 0 ? 'filter' : ''} ${this._isSelected() ? 'filter_selected' : ''}`}>
         {portfolioWrapper}
       </div>
     )
