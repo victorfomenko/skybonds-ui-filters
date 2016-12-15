@@ -181,7 +181,8 @@ const state = {
     domInt: {
       values: [
         {
-          name: 'domestic'
+          name: 'domestic',
+          tag: '1'
         },
         {
           name: 'international'
@@ -238,11 +239,6 @@ const state = {
     duration: {
       from: '',
       to: ''
-    },
-    portfolio: {
-      values: [
-        {name: 'Portfolio'},
-      ]
     }
   }
 };

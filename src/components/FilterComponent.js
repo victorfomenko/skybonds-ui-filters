@@ -51,12 +51,27 @@ export default class FilterComponent extends Component {
   }
 
 
+  _map(name){return name}
+
+
+  _getFilterName(){
+    if(!this._isSelected()){ return this.__filterName }
+    const selectedValues = this.__values.filter( (value)=>{
+      return value.selected ? value.selected : false
+    });
+    const selectedValuesNemes = selectedValues.map( (value)=>{
+      return this._map(value.name)
+    });
+    return selectedValuesNemes.join(', ')
+  }
+
+
   render(){
     return(
       <div className={`filter ${this._isDisabled() ? 'filter_disabled' : ''} ${this._isSelected() ? 'filter_selected' : ''} ${this.prefixName}`}>
         <div className="filter__container">
           <button type="button" className="filter__button">
-            <span className="filter__name">{this.__filterName}</span>
+            <span className="filter__name">{this._getFilterName()}</span>
             <span className="filter__caret" />
           </button>
           <div className="filter__dropdown">
