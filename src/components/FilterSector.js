@@ -62,6 +62,7 @@ class FilterSector extends FilterComponent {
         name={name}
         selected={item.selected}
         disabled={item.disabled}
+        tag={item.tag}
         onChange={ (value) => {
           this.props.domInt.values[index].selected = value;
           this.props.onChange({domInt: this.props.domInt})
@@ -76,6 +77,7 @@ class FilterSector extends FilterComponent {
         selected={item.selected}
         name={name}
         disabled={item.disabled}
+        tag={item.tag}
         onChange={ (value) => {
           this.props.corporations.values[index].selected = value;
           this.props.onChange({corporations: this.props.corporations})
