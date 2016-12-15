@@ -19,7 +19,7 @@ const state = {
         {name:'CRC'},
         {name:'JMD'},
         {name:'TRY', disabled: true},
-        {name:'KZT'},
+        {name:'KZT', tag: '1123235'},
         {name:'DOP', tag: '1235', selected: true},
         {name:'COP'},
         {name:'CAD'},
@@ -66,12 +66,20 @@ const state = {
         {
           name: 'CCC-',
           selected: true,
-          color: '#ffd400'
+          color: '#ffd400',
+          disabled: true
         },
         {
           name: 'B+',
           color: '#ff6e7e',
-          tag: '1235'
+          tag: '1235',
+          disabled: true
+        },
+        {
+          name: 'B-',
+          color: '#ff6e7e',
+          tag: '1123235',
+          disabled: true
         },
         {
           name: 'A-',
@@ -163,13 +171,16 @@ const state = {
           name: 'Oil and Gas'
         },
         {
-          name: 'Construction and development'
+          name: 'Construction and development',
+          disabled: true
         },
         {
-          name: 'Power'
+          name: 'Power',
+          disabled: true
         },
         {
-          name: 'Auto/Truck mfrs'
+          name: 'Auto/Truck mfrs',
+          disabled: true
         },
         {
           name: 'Municipal',

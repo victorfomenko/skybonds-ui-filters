@@ -9,11 +9,15 @@ class FilterListItemRatingAll extends FilterListItemAllAbstract {
     }
 
     _onMouseOver() {
-        this.props.onHoverGroupChange(true)
+        if (!this._isDisabled) {
+            this.props.onHoverGroupChange(true)
+        }
     }
 
     _onMouseOut() {
-        this.props.onHoverGroupChange(false)
+        if (!this._isDisabled) {
+            this.props.onHoverGroupChange(false)
+        }
     }
 
     render() {

@@ -12,6 +12,11 @@ class FilterListItemRating extends FilterListItemAbstract {
     }
 
     _style() {
+
+        if (this.props.disabled) {
+            return
+        }
+         
         var rgbColor = ConvertToRGB(this.props.color);
         var rgbaColor = this._getRgbaBackground(rgbColor);
 
