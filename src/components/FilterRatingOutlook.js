@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FilterComponent from '../components/FilterComponent';
 import FilterListItem from '../components/FilterListItem';
-import FilterListItemRating from '../components/FilterListItem';
+import FilterListItemRating from '../components/FilterListItemRating';
 import FilterListItemAll from '../components/FilterListItemAll';
 import FilterListItemRatingAll from '../components/FilterListItemRatingAll';
 import {ConvertToRGB} from '../helpers/ConvertToRGB';
