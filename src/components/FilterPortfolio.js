@@ -34,6 +34,8 @@ class FilterPortfolio extends FilterComponent {
             {portfolioList}
           </ul>
         </div>
+    } else {
+      return null
     }
 
     return (
