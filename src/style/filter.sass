@@ -156,16 +156,16 @@
 
   &:hover
     background-color: rgba(136,170,221,.15)
-
+  
   &:before
     content: ''
-    margin: 1px 4px -1px 0
+    margin: 1px 4px 0 0
     width: 11px
     height: 11px
     border-radius: 2px
     border: 1px solid rgba(51,51,51,.5)
     display: inline-block
-
+    
   &:after
     position: absolute
     content: ''
@@ -214,3 +214,62 @@
   & a
     color: #000000
     text-decoration: none
+
+
+.filters_rating
+  .filter__dropdown-menu
+    display: flex
+    align-items: stretch
+
+  .filter__dropdown-content
+    padding: 0
+
+.filter__dropdown-section_ratings
+  border-right: 1px solid #DCDCDC
+
+.filter__dropdown-section
+  box-sizing: border-box
+  padding: 5px 0
+
+.filter__dropdown-list
+  display: block
+  margin: 0
+  padding: 0
+
+.filter__dropdown-section_ratings
+  .filter__dropdown-item
+    display: inline-block
+    width: 90px
+
+  .filter__dropdown-group
+    display: flex
+    border-radius: 3px
+    margin: 0 4px
+
+    .filter__dropdown-item:first-child
+      padding-left: 0
+
+    .filter__dropdown-item:last-child
+      padding-pight: 0
+
+  .filter__dropdown-label
+    background: none
+
+
+.filter__dropdown-columns
+  column-count: 3
+  column-gap: 0px
+
+.filters_сurrency
+  .filter__dropdown-columns
+    max-width: 240px
+
+  .filter__dropdown-item_all
+    display: inline-block
+
+.filters_industry
+  .filter__dropdown-columns
+    max-width: 670px
+
+  .filter__dropdown-item_all
+    display: inline-block

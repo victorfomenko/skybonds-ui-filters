@@ -11,6 +11,7 @@ class FilterCurrency extends FilterComponent {
     this._currency = this.props.currency;
     this.initValues(this.props.currency.values);
     this.initFilterName('Currency');
+    this.prefixName = 'filters_сurrency';
   }
 
 
@@ -45,7 +46,11 @@ class FilterCurrency extends FilterComponent {
             this.props.currency.values = values;
             this.props.onChange(this.props.currency);
           }} />
-        {currenciesList}
+        <li>
+          <ul className="filter__dropdown-columns">
+            {currenciesList}
+          </ul>
+        </li>
       </ul>
     )
   }
