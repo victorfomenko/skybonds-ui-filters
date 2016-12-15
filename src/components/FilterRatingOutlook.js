@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FilterComponent from '../components/FilterComponent';
 import FilterListItem from '../components/FilterListItem';
+import FilterListItemRating from '../components/FilterListItem';
 import FilterListItemAll from '../components/FilterListItemAll';
 import FilterListItemRatingAll from '../components/FilterListItemRatingAll';
 import {ConvertToRGB} from '../helpers/ConvertToRGB';
@@ -98,7 +99,7 @@ class FilterRatingOutlook extends FilterComponent {
 
     return groupsMap.map((group, index) => {
       var values = group.values.map((item, itemIndex) => {
-        return <FilterListItem
+        return <FilterListItemRating
             key={item.name}
             id={`rating-${item.name}-${itemIndex}`}
             name={item.name}
@@ -176,7 +177,7 @@ class FilterRatingOutlook extends FilterComponent {
 
     return (
       <div className="filter__dropdown-menu">
-        <div className="filter__dropdown-menu_ratings">
+        <div className="filter__dropdown-section filter__dropdown-section_ratings">
           <ul className="filter__dropdown-list">
             <FilterListItemAll
               key="All ratings"
@@ -189,7 +190,7 @@ class FilterRatingOutlook extends FilterComponent {
             {groupsList}
           </ul>
         </div>
-        <div className="filter__dropdown-menu_outlook">
+        <div className="filter__dropdown-section filter__dropdown-section_outlook">
           <ul className="filter__dropdown-list">
             <FilterListItemAll
               key="All outlook"
