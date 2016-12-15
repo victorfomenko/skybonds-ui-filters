@@ -16,9 +16,7 @@ class FilterListItemRatingAll extends FilterListItemAllAbstract {
     }
 
     _onMouseOut() {
-        if (!this._isDisabled) {
-            this.props.onHoverGroupChange(false)
-        }
+        this.props.onHoverGroupChange(false)
     }
 
     _style() {
