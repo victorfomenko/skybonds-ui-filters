@@ -27,7 +27,7 @@ class FilterRatingOutlook extends FilterComponent {
   }
 
 
-  _mapOutlook(value){
+  _map(value){
     const lables = {
       'na': 'NA',
       'negative': 'Negative',
@@ -55,7 +55,7 @@ class FilterRatingOutlook extends FilterComponent {
         }} />
     });
     var outlookList = this._outlook.values.map((item, index) => {
-      var name = this._mapOutlook(item.name);
+      var name = this._map(item.name);
       return <FilterListItem
         key={item.name}
         id={`outlook-${item.name}-${index}`}
