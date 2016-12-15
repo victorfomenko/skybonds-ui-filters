@@ -18,27 +18,47 @@ class UIFilters extends Component {
     }
   }
 
+
+  _getSelectedValues(filterObject) {
+    var activeValues = [];
+    if(Object.prototype.toString.call(filterObject.values) === '[object Array]' ) {
+      filterObject.values.forEach( (value) => {
+        if(value.selected){
+          activeValues.push(value);
+        }
+      });
+    }
+    return activeValues;
+  }
+
+
   _getStateObj () {
     var selected = {};
     for(const key in this.state.filters){
-      var activeValues = [];
-      if(Object.prototype.toString.call(this.state.filters[key].values) === '[object Array]' ) {
-        this.state.filters[key].values.forEach( (value) => {
-          if(value.selected){
-            activeValues.push(value);
-          }
-        });
-      }
+      var activeValues = this._getSelectedValues(this.state.filters[key]);
       if(activeValues.length > 0) {
         selected[key] = activeValues;
       }
     }
-
-
     return {
       all: this.state.filters,
       selected
     }
+  }
+
+
+  _resetFilterState(){
+    var selected = {};
+    for(const key in this.state.filters){
+      var activeValues = this._getSelectedValues(this.state.filters[key]);
+      activeValues.map(function(filter){
+        filter.selected = false;
+      });
+    }
+    this.setState({
+      all: this.state.filters,
+      selected
+    });
   }
 
 

@@ -23,17 +23,27 @@
 
 .filter__container
   position: relative
-  padding: 5px 0
+  padding: 5px 0 3px
   width: 100%
   margin: 0
   background-color: rgba(0, 0, 0, 0.07)
 
-  &:hover
+  &:hover:not(.filter__container_single)
     background-color: rgba(0, 0, 0, 0.14)
 
     .filter__name
       color: rgb(255, 110, 126)
-
+  &.filter__container_single
+    padding: 3px 0 3px
+    & ul
+      font-size: 12px
+      line-height: 1
+      margin: 0px
+      padding: 0px
+      & .filter__dropdown-label
+        text-transform: capitalize
+        &:hover
+          background: none
 
 .filter__button
   padding: 4px 25px 4px 10px
@@ -73,17 +83,16 @@
   vertical-align: middle
 
 
-  
+
 .filter__dropdown
   display: none
   position: absolute
   top: 100%
   z-index: 1000
   background-color: #fff
-  border: 1px solid #ccc
   border: 1px solid rgba(0,0,0,0.15)
   border-radius: 4px
-  box-shadow: 0 6px 12px rgba(0,0,0,0.175)
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1)
   background-clip: padding-box
   &:hover
     display: block
@@ -147,7 +156,7 @@
 
   &:hover
     background-color: rgba(136,170,221,.15)
-  
+
   &:before
     content: ''
     margin: 1px 4px -1px 0
@@ -156,7 +165,7 @@
     border-radius: 2px
     border: 1px solid rgba(51,51,51,.5)
     display: inline-block
-    
+
   &:after
     position: absolute
     content: ''
@@ -181,16 +190,10 @@
 
 .filter__dropdown-tag
   display: inline-block
-  padding: .25em .4em
-  font-size: 75%
-  line-height: 1
+  font-size: 10px
   color: #999999
-  text-align: center
   white-space: nowrap
-  vertical-align: 1px
-  border-radius: .25rem
-  margin-left: 3px
-
+  margin-left: .4em
   &:empty
     display: none
 
@@ -203,3 +206,11 @@
   margin: 9px 0
   overflow: hidden
   background-color: #e5e5e5
+
+.close_icon
+  padding-left: 10px;
+  font-size: 18px;
+  line-height: 28px;
+  & a
+    color: #000000
+    text-decoration: none
