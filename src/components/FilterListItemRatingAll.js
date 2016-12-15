@@ -6,10 +6,11 @@ class FilterListItemRatingAll extends FilterListItemAllAbstract {
         super(props);
         this._onMouseOver = this._onMouseOver.bind(this);
         this._onMouseOut = this._onMouseOut.bind(this);
+        this._style = this._style.bind(this);
     }
 
     _onMouseOver() {
-        if (!this._isDisabled) {
+        if (!this._isDisabled()) {
             this.props.onHoverGroupChange(true)
         }
     }
@@ -18,6 +19,13 @@ class FilterListItemRatingAll extends FilterListItemAllAbstract {
         if (!this._isDisabled) {
             this.props.onHoverGroupChange(false)
         }
+    }
+
+    _style() {
+        if (this._isDisabled()) {
+            return
+        }
+        return { color: this.props.color}
     }
 
     render() {
@@ -31,7 +39,7 @@ class FilterListItemRatingAll extends FilterListItemAllAbstract {
                            checked={this._isAllChecked() ? 'checked' : ''}
                            disabled={this._isDisabled() ? 'disabled' : ''}
                     />
-                    <label style={{color: this.props.color}} className={`filter__dropdown-label ${this._isDisabled() ? 'filter__dropdown-label_disabled' : '' }`} htmlFor={this.props.name}>
+                    <label style={this._style()} className={`filter__dropdown-label ${this._isDisabled() ? 'filter__dropdown-label_disabled' : '' }`} htmlFor={this.props.name}>
                         <span>{this.props.name}</span>
                     </label>
                 </div>
