@@ -10,9 +10,7 @@ class FilterListItemRatingAll extends FilterListItemAllAbstract {
     }
 
     _onMouseOver() {
-        if (!this._isDisabled()) {
-            this.props.onHoverGroupChange(true)
-        }
+        this.props.onHoverGroupChange(true)
     }
 
     _onMouseOut() {
@@ -26,6 +24,44 @@ class FilterListItemRatingAll extends FilterListItemAllAbstract {
         return { color: this.props.color}
     }
 
+    _isAllChecked() {
+        var condition1 = true;
+        var condition2 = false;
+        this.props.values.forEach((value) => {
+            if (this._isDisabled()) {
+                if (value.selected) {
+                    condition2 = true
+                }
+                if (!value.selected) {
+                    condition1 = false
+                }
+            }
+            else {
+                if (value.selected && !value.disabled) {
+                    condition2 = true
+                }
+                if (!value.selected && !value.disabled) {
+                    condition1 = false
+                }
+            }
+        });
+        return condition1 && condition2 && this.props.values.length > 0
+
+    }
+
+    _toggleAll(toggleTo){
+        this.props.values.forEach((item) => {
+
+            if (this._isDisabled()) {
+                item.selected = toggleTo;
+            } else if(!item.disabled) {
+                item.selected = toggleTo;
+            }
+
+            return item
+        });
+    }
+
     render() {
         return (
             <li className="filter__dropdown-item filter__dropdown-item_all" onMouseOver={this._onMouseOver} onMouseOut={this._onMouseOut}>
@@ -35,7 +71,6 @@ class FilterListItemRatingAll extends FilterListItemAllAbstract {
                            type="checkbox"
                            id={this.props.name}
                            checked={this._isAllChecked() ? 'checked' : ''}
-                           disabled={this._isDisabled() ? 'disabled' : ''}
                     />
                     <label style={this._style()} className={`filter__dropdown-label ${this._isDisabled() ? 'filter__dropdown-label_disabled' : '' }`} htmlFor={this.props.name}>
                         <span>{this.props.name}</span>

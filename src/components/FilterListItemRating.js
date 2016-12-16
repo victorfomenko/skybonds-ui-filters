@@ -12,18 +12,19 @@ class FilterListItemRating extends FilterListItemAbstract {
     }
 
     _style() {
-
-        if (this.props.disabled) {
-            return
-        }
          
         var rgbColor = ConvertToRGB(this.props.color);
         var rgbaColor = this._getRgbaBackground(rgbColor);
 
         if (this.state.hovered) {
+            if (this.props.disabled) {
+                return {backgroundColor: rgbaColor}
+            }
             return { color: this.props.color, backgroundColor: rgbaColor }
         } else {
-            return { color: this.props.color }
+            if (!this.props.disabled) {
+                return {color: this.props.color}
+            }
         }
     }
 
