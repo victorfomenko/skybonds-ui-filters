@@ -39,8 +39,8 @@ class FilterCurrency extends FilterComponent {
     return (
       <ul className="filter__dropdown-menu">
         <FilterListItemAll
-          key="Any currency"
-          name="Any currency"
+          key="All currencies"
+          name="All currencies"
           values={this.props.currency.values || []}
           onChange={ (values) => {
             this.props.currency.values = values;

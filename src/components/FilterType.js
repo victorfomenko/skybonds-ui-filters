@@ -50,8 +50,8 @@ class FilterType extends FilterComponent {
     return (
       <ul className="filter__dropdown-menu">
         <FilterListItemAll
-          key="Any types"
-          name="Any types"
+          key="All types"
+          name="All types"
           values={this.props.type.values || []}
           onChange={ (values) => {
             this.props.type.values = values;
