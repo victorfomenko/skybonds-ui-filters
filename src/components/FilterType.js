@@ -10,7 +10,7 @@ class FilterType extends FilterComponent {
     this.props.type.values = this.props.type.values || [];
     this._type = this.props.type;
     this.initValues(this.props.type.values);
-    this.initFilterName('Types');
+    this.initFilterName('Type');
   }
 
   _sortCollection(){
@@ -21,9 +21,9 @@ class FilterType extends FilterComponent {
 
   _map(value){
     const lables = {
-      'convertible': 'Convertibles',
-      'floater': 'Floaters',
-      'regular': 'Regular bonds',
+      'convertible': 'Convertible',
+      'floater': 'Floater',
+      'regular': 'Regular',
       'subord': 'Subordinated'
     };
     if(lables[value] != null) { return lables[value] }
@@ -51,8 +51,8 @@ class FilterType extends FilterComponent {
     return (
       <ul className="filter__dropdown-menu">
         <FilterListItemAll
-          key="Any types"
-          name="Any types"
+          key="All types"
+          name="All types"
           values={this.props.type.values || []}
           onChange={ (values) => {
             this.props.type.values = values;

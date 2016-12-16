@@ -49,8 +49,8 @@ class FilterLiquidity extends FilterComponent {
     return (
       <ul className="filter__dropdown-menu">
         <FilterListItemAll
-          key="Any liquidity"
-          name="Any liquidity"
+          key="All liquidities"
+          name="All liquidities"
           values={this.props.liquidity.values || []}
           onChange={ (values) => {
             this.props.liquidity.values = values;
