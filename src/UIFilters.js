@@ -15,14 +15,32 @@ class UIFilters extends Component {
     super(props);
     this.state = {
       filters: this.props.filters || {}
+    };
+    this._initEEListners();
+  }
+
+
+  _initEEListners(){
+    if(this.props.ee != null) {
+      this.props.ee.on('render', this._onEERender.bind(this))
     }
   }
 
 
+  _onEERender(filters={}){
+    for (var key in filters) {
+      this.props.filters[key] = filters[key]
+    }
+    this.setState({filters: filters});
+  }
+
+
   _getSelectedValues(filterObject) {
+    if (filterObject == null) { filterObject = {} }
     var activeValues = [];
-    if(Object.prototype.toString.call(filterObject.values) === '[object Array]' ) {
-      filterObject.values.forEach( (value) => {
+    const values = filterObject.values || [];
+    if(Object.prototype.toString.call(values) === '[object Array]' ) {
+      values.forEach( (value) => {
         if(value.selected){
           activeValues.push(value);
         }
@@ -47,26 +65,6 @@ class UIFilters extends Component {
   }
 
 
-  _resetFilterState(){
-    var selected = {};
-    for(const key in this.state.filters){
-      var activeValues = this._getSelectedValues(this.state.filters[key]);
-      activeValues.map(function(filter){
-        filter.selected = false;
-      });
-    }
-    this.setState({
-      all: this.state.filters,
-      selected
-    });
-  }
-
-
-  _onChange () {
-    this.setState(this._getStateObj());
-  }
-
-
   componentDidUpdate(){
     this.props.onStateChange(this._getStateObj());
   }
@@ -77,8 +75,8 @@ class UIFilters extends Component {
       <div className="filters">
         <FilterIndustry
           industry={this.state.filters.industry || {}}
-          onChange={value => {
-              this.props.filters.industry = value;
+          onChange={ (industry) => {
+              this.props.filters.industry = industry;
               this.setState({filters: this.props.filters})
             }
           }
@@ -153,6 +151,7 @@ class UIFilters extends Component {
 }
 
 UIFilters.propTypes = {
+  ee: React.PropTypes.object,
   filters: React.PropTypes.object.isRequired,
   onStateChange: React.PropTypes.func.isRequired
 };

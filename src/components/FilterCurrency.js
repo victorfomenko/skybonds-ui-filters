@@ -7,17 +7,14 @@ import FilterListItemAll from '../components/FilterListItemAll';
 class FilterCurrency extends FilterComponent {
   constructor(props) {
     super(props);
-    this.props.currency.values = this.props.currency.values || [];
-    this._currency = this.props.currency;
-    this.initValues(this.props.currency);
+    this.initValues(props.currency);
     this.initFilterName('Currency');
     this.prefixName = 'filters_сurrency';
   }
 
 
-  _sortCollection(){
-    if (this.props.currency.sortStrategy == null) {return null}
-    this._currency.values.sort(this.props.currency.sortStrategy)
+  componentWillReceiveProps(props){
+    this.initValues(props.currency);
   }
 
   _getClass(name) {
@@ -32,8 +29,9 @@ class FilterCurrency extends FilterComponent {
   }
 
   content() {
-    this._sortCollection();
-    var currenciesList = this._currency.values.map((item, index) => {
+    this.sortCollection('currency');
+    var {currency} = this.props;
+    var currenciesList = (currency.values || []).map((item, index) => {
       return <FilterListItem
         key={index}
         name={item.name}
@@ -43,8 +41,8 @@ class FilterCurrency extends FilterComponent {
         className={this._getClass(item.name)}
         tag={item.tag}
         onChange={ (value) => {
-          this.props.currency.values[index].selected = value;
-          this.props.onChange(this.props.currency)
+          currency.values[index].selected = value;
+          this.props.onChange(currency)
         }} />
     });
     return (
@@ -52,10 +50,10 @@ class FilterCurrency extends FilterComponent {
         <FilterListItemAll
           key="All currencies"
           name="All currencies"
-          values={this.props.currency.values || []}
+          values={currency.values || []}
           onChange={ (values) => {
-            this.props.currency.values = values;
-            this.props.onChange(this.props.currency);
+            currency.values = values;
+            this.props.onChange(currency);
           }} />
         <li>
           <ul className="filter__dropdown-columns">

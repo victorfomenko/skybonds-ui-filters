@@ -8,15 +8,12 @@ import FilterListItemAll from '../components/FilterListItemAll';
 class FilterCountry extends FilterComponent {
   constructor(props) {
     super(props);
-    this.props.country.values = this.props.country.values || [];
-    this._country = this.props.country;
-    this.initValues(this.props.country);
+    this.initValues(props.country);
     this.initFilterName('Country');
   }
 
-  _sortCollection(){
-    if (this.props.country.sortStrategy == null) {return null}
-    this._country.values.sort(this.props.country.sortStrategy)
+  componentWillReceiveProps(props){
+    this.initValues(props.country);
   }
 
   _map(value){
@@ -30,8 +27,9 @@ class FilterCountry extends FilterComponent {
   }
 
   content() {
-    this._sortCollection();
-    var countriesList = this._country.values.map((item, index) => {
+    this.sortCollection('country');
+    var {country} = this.props;
+    var countriesList = (country.values || []).map((item, index) => {
       var name = this._map(item.name);
       return <FilterListItem
         key={index}
@@ -41,8 +39,8 @@ class FilterCountry extends FilterComponent {
         disabled={item.disabled}
         tag={item.tag}
         onChange={ (value) => {
-          this.props.country.values[index].selected = value;
-          this.props.onChange(this.props.country)
+          country.values[index].selected = value;
+          this.props.onChange(country)
         }} />
     });
 
@@ -51,10 +49,10 @@ class FilterCountry extends FilterComponent {
         <FilterListItemAll
           key="All countries"
           name="All countries"
-          values={this.props.country.values || []}
+          values={country.values || []}
           onChange={ (values) => {
-            this.props.country.values = values;
-            this.props.onChange(this.props.country);
+            country.values = values;
+            this.props.onChange(country);
           }} />
         {countriesList}
       </ul>

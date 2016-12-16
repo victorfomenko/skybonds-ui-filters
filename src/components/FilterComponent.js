@@ -5,7 +5,7 @@ export default class FilterComponent extends Component {
   constructor(props) {
     super(props);
     this.__values = [];
-    this.__filterName = 'Filter'
+    this.__filterName = 'Filter';
     this.prefixName = ''
   }
 
@@ -55,6 +55,13 @@ export default class FilterComponent extends Component {
 
 
   _map(name){return name}
+
+
+  sortCollection(filterName){
+    if(filterName == null){return null}
+    if (this.props[filterName].sortStrategy == null) {return null}
+    this.props[filterName].values.sort(this.props[filterName].sortStrategy)
+  }
 
 
   _getFilterName(){

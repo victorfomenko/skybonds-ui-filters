@@ -5,21 +5,15 @@ import FilterListItem from '../components/FilterListItem';
 class FilterSector extends FilterComponent {
   constructor(props) {
     super(props);
-    this._checkProps();
-    this._domInt = this.props.domInt;
-    this._corporations = this.props.corporations;
-    this._financial = this.props.financial;
-    this._government = this.props.government;
-    this.initValues(this.props.domInt, this.props.corporations, this.props.financial, this.props.government);
+    this.initValues(props.domInt, props.corporations, props.financial, props.government);
     this.initFilterName('Sector');
   }
 
-  _checkProps() {
-    this.props.domInt.values = this.props.domInt.values || [];
-    this.props.corporations.values = this.props.corporations.values || [];
-    this.props.financial.values = this.props.financial.values || [];
-    this.props.government.values = this.props.government.values || [];
+
+  componentWillReceiveProps(props){
+    this.initValues(props.domInt, props.corporations, props.financial, props.government);
   }
+
 
   _map(value){
     const lables = {
@@ -33,10 +27,13 @@ class FilterSector extends FilterComponent {
       'false': 'Non-government',
     };
     if(lables[value] != null) { return lables[value] }
+    return value
   };
 
   content() {
-    var domIntList = this._domInt.values.map((item, index) => {
+    var {domInt, corporations, financial, government} = this.props;
+
+    var domIntList = (domInt.values || []).map((item, index) => {
       var name = this._map(item.name);
       return <FilterListItem
         key={item.name}
@@ -46,12 +43,12 @@ class FilterSector extends FilterComponent {
         disabled={item.disabled}
         tag={item.tag}
         onChange={ (value) => {
-          this.props.domInt.values[index].selected = value;
-          this.props.onChange({domInt: this.props.domInt})
+          domInt.values[index].selected = value;
+          this.props.onChange({ domInt })
         }} />
     });
 
-    var corporationsList = this._corporations.values.map((item, index) => {
+    var corporationsList = (corporations.values || []).map((item, index) => {
       var name = this._map(item.name);
       return <FilterListItem
         key={item.name}
@@ -61,12 +58,12 @@ class FilterSector extends FilterComponent {
         disabled={item.disabled}
         tag={item.tag}
         onChange={ (value) => {
-          this.props.corporations.values[index].selected = value;
-          this.props.onChange({corporations: this.props.corporations})
+          corporations.values[index].selected = value;
+          this.props.onChange({ corporations })
         }} />
     });
 
-    var financialList = this._financial.values.map((item, index) => {
+    var financialList = (financial.values || []).map((item, index) => {
       var name = this._map(item.name);
       return <FilterListItem
         key={item.name}
@@ -76,12 +73,12 @@ class FilterSector extends FilterComponent {
         disabled={item.disabled}
         tag={item.tag}
         onChange={ (value) => {
-          this.props.financial.values[index].selected = value;
-          this.props.onChange({financial: this.props.financial})
+          financial.values[index].selected = value;
+          this.props.onChange({ financial })
         }} />
     });
 
-    var governmentList = this._government.values.map((item, index) => {
+    var governmentList = (government.values || []).map((item, index) => {
       var name = this._map(item.name);
       return (
         <FilterListItem
@@ -92,8 +89,8 @@ class FilterSector extends FilterComponent {
           disabled={item.disabled}
           tag={item.tag}
           onChange={ (value) => {
-            this.props.government.values[index].selected = value;
-            this.props.onChange({government: this.props.government})
+            government.values[index].selected = value;
+            this.props.onChange({ government })
           }} />
       )
     });

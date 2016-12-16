@@ -9,23 +9,20 @@ import {ConvertToRGB} from '../helpers/ConvertToRGB';
 class FilterRatingOutlook extends FilterComponent {
   constructor(props) {
     super(props);
-    this._checkProps();
-    this._rating = this.props.rating;
-    this._outlook = this.props.outlook;
-    this.initValues(this.props.rating, this.props.outlook);
+    this.initValues(props.rating, props.outlook);
     this.initFilterName('Rating & Outlook');
     this.prefixName = 'filters_rating';
     this.state = { groupHover: '' }
   }
 
-  _checkProps() {
-    this.props.rating.values = this.props.rating.values || [];
-    this.props.outlook.values = this.props.outlook.values || [];
+  componentWillReceiveProps(props){
+    this.initValues(props.rating, props.outlook);
   }
 
   _getRatingsByGroup() {
     var result = {};
-    this._rating.values.forEach((rating)=>{
+    var {rating} = this.props;
+    (rating.values || []).forEach((rating)=>{
       var group = /^[A-Z]+/i.exec(String(typeof rating.name !== "undefined" && rating.name !== null ? rating.name : ''));
       if ( group != null) {
         if (result[ group[0] ] == null) {
@@ -42,16 +39,10 @@ class FilterRatingOutlook extends FilterComponent {
     return result;
   }
 
-  _sortCollections(){
-    if (this.props.rating.sortStrategy == null) {return null}
-    this._rating.values.sort(this.props.rating.sortStrategy);
-
-    if (this.props.outlook.sortStrategy == null) {return null}
-    this._outlook.values.sort(this.props.outlook.sortStrategy)
-  }
 
   getOutlookList () {
-    return this._outlook.values.map((item, index) => {
+    var {outlook} = this.props;
+    return (outlook.values || []).map((item, index) => {
       var name = this._map(item.name);
       return <FilterListItem
           key={item.name}
@@ -170,9 +161,9 @@ class FilterRatingOutlook extends FilterComponent {
   }
 
   content() {
-    this._sortCollections();
+    this.sortCollection('rating');
+    this.sortCollection('outlook');
     var outlookList = this.getOutlookList();
-
     var groupsList = this._getGroupList();
 
     return (

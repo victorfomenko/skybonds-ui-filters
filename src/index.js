@@ -2,11 +2,13 @@ import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import UIFilters from './UIFilters';
+require('../vendors.css');
+require('../main.css');
 require('./style/layout.sass');
 require('./style/filter.sass');
 
 const rootEl = document.getElementById('root');
-const state = {
+var state = {
   filters: {
     currency: {
       values: [
@@ -252,7 +254,7 @@ const state = {
     },
     portfolio: {
       values: [
-        {name: 'Portfolio'},
+        {name: 'Portfolio', selected: true},
       ]
     }
   }
