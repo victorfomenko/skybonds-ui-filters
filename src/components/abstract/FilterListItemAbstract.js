@@ -16,7 +16,8 @@ FilterListItemAbstract.propTypes = {
     name: React.PropTypes.string.isRequired,
     disabled: React.PropTypes.bool,
     onChange: React.PropTypes.func.isRequired,
-    selected: React.PropTypes.bool
+    selected: React.PropTypes.bool,
+    className: React.PropTypes.string
 };
 
 export default FilterListItemAbstract

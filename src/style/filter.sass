@@ -274,3 +274,36 @@
 
   .filter__dropdown-item_all
     display: inline-block
+
+.filter__dropdown-item_highlighted
+  font-weight: bold
+
+.filter__dropdown-item_subord
+  .filter__dropdown-label
+    span:first-child:after
+      content: 's'
+      margin-left: 5px
+      color: #999
+      font-weight: 400
+      font-size: 12px
+      line-height: 12px
+
+.filter__dropdown-item_floater
+  .filter__dropdown-label
+    span:first-child:after
+      content: '~'
+      margin-left: 5px
+      color: #999
+      font-weight: 400
+      font-size: 12px
+      line-height: 12px
+
+.filter__dropdown-item_convertible
+  .filter__dropdown-label
+    span:first-child:after
+      content: '↔'
+      margin-left: 5px
+      color: #999
+      font-weight: 400
+      font-size: 12px
+      line-height: 12px

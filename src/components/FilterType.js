@@ -40,6 +40,7 @@ class FilterType extends FilterComponent {
         name={name}
         id={`country-${item.name}-${index}`}
         selected={item.selected}
+        className={`filter__dropdown-item_${item.name}`}
         disabled={item.disabled}
         tag={item.tag}
         onChange={ (value) => {

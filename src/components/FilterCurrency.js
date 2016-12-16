@@ -20,6 +20,16 @@ class FilterCurrency extends FilterComponent {
     this._currency.values.sort(this.props.currency.sortStrategy)
   }
 
+  _getClass(name) {
+    var currencyBoldList = [
+      'RUB',
+      'USD',
+      'EUR'
+    ];
+    if (currencyBoldList.indexOf(name) != -1 ){
+      return 'filter__dropdown-item_highlighted'
+    }
+  }
 
   content() {
     this._sortCollection();
@@ -30,6 +40,7 @@ class FilterCurrency extends FilterComponent {
         id={`country-${item.name}-${index}`}
         selected={item.selected}
         disabled={item.disabled}
+        className={this._getClass(item.name)}
         tag={item.tag}
         onChange={ (value) => {
           this.props.currency.values[index].selected = value;

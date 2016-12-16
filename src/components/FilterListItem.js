@@ -8,7 +8,7 @@ class FilterListItem extends FilterListItemAbstract {
 
   render() {
     return (
-        <li className="filter__dropdown-item">
+        <li className={`filter__dropdown-item ${this.props.className}`}>
           <div className="filter__dropdown-link">
             <input className="filter__dropdown-checkbox"
                    type="checkbox"
