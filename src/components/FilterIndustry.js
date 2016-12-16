@@ -19,6 +19,16 @@ class FilterIndustry extends FilterComponent {
     this._industry.values.sort(this.props.industry.sortStrategy)
   }
 
+  _getClass(name) {
+    var industryBoldList = [
+      'Municipal',
+      'Sovereign'
+    ];
+    if (industryBoldList.indexOf(name) != -1 ){
+      return 'filter__dropdown-item_highlighted'
+    }
+  }
+
   content() {
     this._sortCollection();
     var countriesList = this._industry.values.map((item, index) => {
@@ -29,6 +39,7 @@ class FilterIndustry extends FilterComponent {
         selected={item.selected}
         disabled={item.disabled}
         tag={item.tag}
+        className={this._getClass(item.name)}
         onChange={ (value) => {
           this.props.industry.values[index].selected = value;
           this.props.onChange(this.props.industry)
