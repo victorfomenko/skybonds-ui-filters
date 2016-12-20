@@ -9,7 +9,7 @@ class FilterType extends FilterComponent {
     super(props);
     this.props.type.values = this.props.type.values || [];
     this._type = this.props.type;
-    this.initValues(this.props.type.values);
+    this.initValues(this.props.type);
     this.initFilterName('Type');
   }
 

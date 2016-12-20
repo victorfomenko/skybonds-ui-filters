@@ -9,7 +9,7 @@ class FilterCurrency extends FilterComponent {
     super(props);
     this.props.currency.values = this.props.currency.values || [];
     this._currency = this.props.currency;
-    this.initValues(this.props.currency.values);
+    this.initValues(this.props.currency);
     this.initFilterName('Currency');
     this.prefixName = 'filters_сurrency';
   }

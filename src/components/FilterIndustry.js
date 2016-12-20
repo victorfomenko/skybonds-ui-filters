@@ -9,7 +9,7 @@ class FilterIndustry extends FilterComponent {
     super(props);
     this.props.industry.values = this.props.industry.values || [];
     this._industry = this.props.industry;
-    this.initValues(this.props.industry.values);
+    this.initValues(this.props.industry);
     this.initFilterName('Industry');
     this.prefixName = 'filters_industry';
   }
