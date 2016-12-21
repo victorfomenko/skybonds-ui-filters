@@ -10,7 +10,7 @@ class FilterCountry extends FilterComponent {
     super(props);
     this.props.country.values = this.props.country.values || [];
     this._country = this.props.country;
-    this.initValues(this.props.country.values);
+    this.initValues(this.props.country);
     this.initFilterName('Country');
   }
 

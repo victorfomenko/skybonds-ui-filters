@@ -16,15 +16,18 @@ export default class FilterComponent extends Component {
   }
 
 
-  initValues(...args){
+  initValues(...filters){
     const result = [];
-    for(var i=0; i<args.length; i++){
-      var values = args[i];
-      values.forEach((item)=>{
+    for(var i=0; i<filters.length; i++) {
+      var filter = filters[i];
+      if (filter == null) { filter = {} }
+      var values = filter.values || [];
+      var sortStrategy = filter.sortStrategy || null;
+      if(sortStrategy != null){ values.sort(sortStrategy); }
+      values.forEach((item)=> {
         result.push(item)
-      })
+      });
     }
-
     this.__values = result
   }
 

@@ -10,7 +10,7 @@ class FilterSector extends FilterComponent {
     this._corporations = this.props.corporations;
     this._financial = this.props.financial;
     this._government = this.props.government;
-    this.initValues(this.props.domInt.values, this.props.corporations.values, this.props.financial.values, this.props.government.values);
+    this.initValues(this.props.domInt, this.props.corporations, this.props.financial, this.props.government);
     this.initFilterName('Sector');
   }
 

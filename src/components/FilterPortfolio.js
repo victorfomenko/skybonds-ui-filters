@@ -8,7 +8,7 @@ class FilterPortfolio extends FilterComponent {
     super(props);
     this.props.portfolio.values = this.props.portfolio.values || [];
     this._portfolio = this.props.portfolio;
-    this.initValues(this.props.portfolio.values);
+    this.initValues(this.props.portfolio);
     this.initFilterName('Portfolio');
   }
 

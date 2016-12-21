@@ -9,7 +9,7 @@ class FilterLiquidity extends FilterComponent {
     super(props);
     this.props.liquidity.values = this.props.liquidity.values || [];
     this._liquidity = this.props.liquidity;
-    this.initValues(this.props.liquidity.values);
+    this.initValues(this.props.liquidity);
     this.initFilterName('Liquidity');
   }
 

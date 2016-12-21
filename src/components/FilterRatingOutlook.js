@@ -12,7 +12,7 @@ class FilterRatingOutlook extends FilterComponent {
     this._checkProps();
     this._rating = this.props.rating;
     this._outlook = this.props.outlook;
-    this.initValues(this.props.rating.values, this.props.outlook.values);
+    this.initValues(this.props.rating, this.props.outlook);
     this.initFilterName('Rating & Outlook');
     this.prefixName = 'filters_rating';
     this.state = { groupHover: '' }
