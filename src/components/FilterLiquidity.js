@@ -7,16 +7,15 @@ import FilterListItemAll from '../components/FilterListItemAll';
 class FilterLiquidity extends FilterComponent {
   constructor(props) {
     super(props);
-    this.props.liquidity.values = this.props.liquidity.values || [];
-    this._liquidity = this.props.liquidity;
-    this.initValues(this.props.liquidity);
+    this.initValues(props.liquidity);
     this.initFilterName('Liquidity');
   }
 
-  _sortCollection(){
-    if (this.props.liquidity.sortStrategy == null) {return null}
-    this._liquidity.values.sort(this.props.liquidity.sortStrategy)
+
+  componentWillReceiveProps(props){
+    this.initValues(props.liquidity);
   }
+
 
   _map(value){
     const lables = {
@@ -30,9 +29,11 @@ class FilterLiquidity extends FilterComponent {
     return value
   }
 
+
   content() {
-    this._sortCollection();
-    var liquiditiesList = this._liquidity.values.map((item, index) => {
+    this.sortCollection('liquidity');
+    var {liquidity} = this.props;
+    var liquiditiesList = (liquidity.values || []).map((item, index) => {
       var name = this._map(item.name);
       return <FilterListItem
         key={index}
@@ -42,8 +43,8 @@ class FilterLiquidity extends FilterComponent {
         disabled={item.disabled}
         tag={item.tag}
         onChange={ (value) => {
-          this.props.liquidity.values[index].selected = value;
-          this.props.onChange(this.props.liquidity)
+          liquidity.values[index].selected = value;
+          this.props.onChange(liquidity)
         }} />
     });
     return (
@@ -51,10 +52,10 @@ class FilterLiquidity extends FilterComponent {
         <FilterListItemAll
           key="All liquidities"
           name="All liquidities"
-          values={this.props.liquidity.values || []}
+          values={liquidity.values || []}
           onChange={ (values) => {
-            this.props.liquidity.values = values;
-            this.props.onChange(this.props.liquidity);
+            liquidity.values = values;
+            this.props.onChange(liquidity);
           }} />
         {liquiditiesList}
       </ul>

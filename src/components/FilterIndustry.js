@@ -7,17 +7,16 @@ import FilterListItemAll from '../components/FilterListItemAll';
 class FilterIndustry extends FilterComponent {
   constructor(props) {
     super(props);
-    this.props.industry.values = this.props.industry.values || [];
-    this._industry = this.props.industry;
-    this.initValues(this.props.industry);
+    this.initValues(props.industry);
     this.initFilterName('Industry');
     this.prefixName = 'filters_industry';
   }
 
-  _sortCollection(){
-    if (this.props.industry.sortStrategy == null) {return null}
-    this._industry.values.sort(this.props.industry.sortStrategy)
+
+  componentWillReceiveProps(props){
+    this.initValues(props.industry);
   }
+
 
   _getClass(name) {
     var industryBoldList = [
@@ -30,8 +29,9 @@ class FilterIndustry extends FilterComponent {
   }
 
   content() {
-    this._sortCollection();
-    var countriesList = this._industry.values.map((item, index) => {
+    this.sortCollection('industry');
+    var {industry} = this.props;
+    var countriesList = (industry.values || []).map((item, index) => {
       return <FilterListItem
         key={index}
         id={`industry-${item.name}-${index}`}
@@ -41,8 +41,8 @@ class FilterIndustry extends FilterComponent {
         tag={item.tag}
         className={this._getClass(item.name)}
         onChange={ (value) => {
-          this.props.industry.values[index].selected = value;
-          this.props.onChange(this.props.industry)
+          industry.values[index].selected = value;
+          this.props.onChange(industry)
         }} />
     });
 
@@ -51,10 +51,10 @@ class FilterIndustry extends FilterComponent {
         <FilterListItemAll
           key="All industries"
           name="All industries"
-          values={this.props.industry.values || []}
+          values={industry.values || []}
           onChange={ (values) => {
-            this.props.industry.values = values;
-            this.props.onChange(this.props.industry);
+            industry.values = values;
+            this.props.onChange(industry);
           }} />
 
         <li>
