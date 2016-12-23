@@ -39,6 +39,59 @@ class FilterRatingOutlook extends FilterComponent {
     return result;
   }
 
+  _getFilterName(){
+    if(!this._isSelected()){ return this.__filterName }
+    const selectedValues = this.__values.filter( (value)=>{
+      return value.selected ? value.selected : false
+    });
+    const selectedValuesNames = selectedValues.map( (value)=>{
+      return this._map(value.name)
+    });
+    var groups =  this._getRatingsByGroup();
+    var ratingGroupsCount = this._ratingGroupsCount(groups);
+
+    var ratingSelectedValuesNames = [];
+    var outlookSelectedValuesNames = [];
+
+    for (var i = 0, len = selectedValuesNames.length; i < len; i++) {
+      var isRatingItem = false;
+      for(var group in ratingGroupsCount) {
+        if (selectedValuesNames[i].replace(/[+-]/g, '') === group) {
+          isRatingItem = true;
+          break
+        }
+      }
+      if (isRatingItem) { ratingSelectedValuesNames.push(selectedValuesNames[i]); }
+      else { outlookSelectedValuesNames.push(selectedValuesNames[i]); }
+    }
+
+    var result = [];
+    for(var group in ratingGroupsCount) {
+      var ratingsOfGroup = [];
+
+      for (var i = 0, len = ratingSelectedValuesNames.length; i < len; i++) {
+        var rating = ratingSelectedValuesNames[i];
+        if (rating.replace(/[+-]/g, '') === group) {
+          ratingsOfGroup.push(rating);
+        }
+      }
+      if (ratingGroupsCount[group] > 1 && ratingsOfGroup.length === ratingGroupsCount[group]) {
+        result.push('all ' + group);
+      } else {
+        result = result.concat(ratingsOfGroup);
+      }
+    }
+
+    return result.concat(outlookSelectedValuesNames).join(', ')
+  }
+
+  _ratingGroupsCount(ratingGroups){
+    var result = {};
+    for(var groupName in ratingGroups) {
+      result[ groupName ] = ratingGroups[ groupName ].values.length
+    }
+    return result;
+  }
 
   getOutlookList () {
     var {outlook} = this.props;
@@ -79,7 +132,7 @@ class FilterRatingOutlook extends FilterComponent {
     return result;
   }
 
-  _getGroupList () {
+  _getRatingGroupList () {
     var _style = (group)=> {
       var styleConfig = {color: group.color};
       if (group.name == this.state.groupHover) {
@@ -181,7 +234,7 @@ class FilterRatingOutlook extends FilterComponent {
     this.sortCollection('rating');
     this.sortCollection('outlook');
     var outlookList = this.getOutlookList();
-    var groupsList = this._getGroupList();
+    var groupsList = this._getRatingGroupList();
 
     return (
       <div className="filter__dropdown-menu">
