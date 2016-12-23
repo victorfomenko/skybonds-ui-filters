@@ -16,6 +16,7 @@ class UIFilters extends Component {
     this.state = {
       filters: this.props.filters || {}
     };
+    this.shouldTriggerOnStateChange = true;
     this._initEEListners();
   }
 
@@ -27,12 +28,14 @@ class UIFilters extends Component {
   }
 
 
-  _onEERender(filters={}){
+  _onEERender(filters={}, shouldTriggerOnStateChange = false){
+    this.shouldTriggerOnStateChange = shouldTriggerOnStateChange;
     for (var key in filters) {
       this.props.filters[key] = filters[key]
     }
-    this.setState({filters: filters});
+    this.setState({ filters });
   }
+
 
 
   _getSelectedValues(filterObject) {
@@ -66,7 +69,10 @@ class UIFilters extends Component {
 
 
   componentDidUpdate(){
-    this.props.onStateChange(this._getStateObj());
+    if(this.shouldTriggerOnStateChange){
+      this.props.onStateChange(this._getStateObj());
+    }
+    this.shouldTriggerOnStateChange = true;
   }
 
 
