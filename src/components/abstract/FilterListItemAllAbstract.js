@@ -29,7 +29,7 @@ class FilterListItemAllAbstract extends Component {
 
     _toggleAll(toggleTo){
         this.props.values.forEach((item) => {
-            if(!item.disabled) {
+            if(!item.disabled || !toggleTo) {
                 item.selected = toggleTo;
             }
             return item
