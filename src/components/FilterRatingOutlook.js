@@ -64,6 +64,21 @@ class FilterRatingOutlook extends FilterComponent {
     }
   }
 
+  _getAllTagCount (values) {
+    var result = null;
+
+    function isNumeric(value) {
+      return !isNaN(parseFloat(value)) && isFinite(value);
+    }
+
+    values.map((item) => {
+      if (item.tag != null && isNumeric(item.tag)) {
+        result = result + +item.tag
+      }
+    });
+    return result;
+  }
+
   _getGroupList () {
     var _style = (group)=> {
       var styleConfig = {color: group.color};
@@ -84,9 +99,10 @@ class FilterRatingOutlook extends FilterComponent {
         name: key,
         color: value.color,
         values: value.values,
+        tag: this._getAllTagCount(value.values),
         hover: false
       })
-    }
+    };
 
     return groupsMap.map((group, index) => {
       var values = group.values.map((item, itemIndex) => {
@@ -127,6 +143,7 @@ class FilterRatingOutlook extends FilterComponent {
                     name={group.name}
                     color={group.color}
                     groupHover={this.state.groupHover}
+                    tag={group.tag}
                     values={group.values || []}
                     onHoverGroupChange={ (value) => {
                       var groupHover = ''

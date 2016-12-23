@@ -74,6 +74,7 @@ class FilterListItemRatingAll extends FilterListItemAllAbstract {
                     />
                     <label style={this._style()} className={`filter__dropdown-label ${this._isDisabled() ? 'filter__dropdown-label_disabled' : '' }`} htmlFor={this.props.name}>
                         <span>{this.props.name}</span>
+                        <span className="filter__dropdown-tag">{this.props.tag}</span>
                     </label>
                 </div>
             </li>
