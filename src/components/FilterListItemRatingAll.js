@@ -54,7 +54,7 @@ class FilterListItemRatingAll extends FilterListItemAllAbstract {
 
             if (this._isDisabled()) {
                 item.selected = toggleTo;
-            } else if(!item.disabled) {
+            } else if(!item.disabled || !toggleTo) {
                 item.selected = toggleTo;
             }
 

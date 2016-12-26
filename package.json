@@ -1,6 +1,6 @@
 {
   "name": "@skybonds/ui-filters",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "React based filter component",
   "scripts": {
     "start": "node server.js",
