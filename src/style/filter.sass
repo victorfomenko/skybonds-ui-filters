@@ -307,3 +307,69 @@
       font-weight: 400
       font-size: 12px
       line-height: 12px
+.range-dropdown-content
+  min-height: 200px
+  min-width: 280px
+  .loading-cover
+    display: none
+  .range-list
+    list-style: none
+    font-size: 12px
+    line-height: 12px
+    &-header
+      display: flex
+      &-label
+        display: block
+        width: 100px
+      &-min
+        text-align: right
+        padding-right: 20px
+        width: 30px
+      &-max
+        text-align: right
+        padding-right: 20px
+        width: 65px
+    &-item
+      display: flex
+      padding: 6px 0
+      &-label
+        display: block
+        width: 100px
+      &-sublabel
+        font-size: 10px
+        margin-left: 5px
+        color: #999
+      &-min
+        color: #48c
+        text-align: right
+        padding-right: 20px
+        & input
+          width: 30px
+      &-max
+        color: #48c
+        text-align: right
+        padding-right: 20px
+        & input
+          width: 65px
+      &-value
+        position: relative
+        & input, & input:focus
+          border: none
+          cursor: pointer
+          text-align: right
+          outline: none
+          text-decoration: underline
+          color: transparent
+          text-shadow: 0 0 0 #48c
+          &.active::first-line
+            background-color: #B2CEEA
+        & .close-icon
+          position: absolute
+          top: 2px
+          right: 3px
+          color: #48c
+          text-decoration: none
+  &.empty
+    .loading-cover
+      display: block
+

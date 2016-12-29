@@ -30,7 +30,7 @@ class FilterListItemRating extends FilterListItemAbstract {
 
     _getRgbaBackground (rgbColor){
         if (rgbColor != null) {
-            return "rgba(" + rgbColor.r + "," + rgbColor.g + "," + rgbColor.b + ", 0.1)";
+            return 'rgba(' + rgbColor.r + ',' + rgbColor.g + ',' + rgbColor.b + ', 0.1)';
         }
     }
 
@@ -44,17 +44,17 @@ class FilterListItemRating extends FilterListItemAbstract {
 
     render() {
         return (
-            <li className="filter__dropdown-item" onMouseOver={this._onMouseOver} onMouseOut={this._onMouseOut}>
-                <div className="filter__dropdown-link">
-                    <input className="filter__dropdown-checkbox"
-                           type="checkbox"
+            <li className='filter__dropdown-item' onMouseOver={this._onMouseOver} onMouseOut={this._onMouseOut}>
+                <div className='filter__dropdown-link'>
+                    <input className='filter__dropdown-checkbox'
+                           type='checkbox'
                            onChange={this._onChange}
                            id={this.props.id}
                            checked={this.props.selected ? 'checked' : ''}
                     />
                     <label style={this._style()} className={`filter__dropdown-label ${this.props.disabled ? 'filter__dropdown-label_disabled' : '' }`} htmlFor={this.props.id}>
                         <span>{this.props.name}</span>
-                        <span className="filter__dropdown-tag">{this.props.tag}</span>
+                        <span className='filter__dropdown-tag'>{this.props.tag}</span>
                     </label>
                 </div>
             </li>

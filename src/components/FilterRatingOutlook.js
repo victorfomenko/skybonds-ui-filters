@@ -23,7 +23,7 @@ class FilterRatingOutlook extends FilterComponent {
     var result = {};
     var {rating} = this.props;
     (rating.values || []).forEach((rating)=>{
-      var group = /^[A-Z]+/i.exec(String(typeof rating.name !== "undefined" && rating.name !== null ? rating.name : ''));
+      var group = /^[A-Z]+/i.exec(String(typeof rating.name !== 'undefined' && rating.name !== null ? rating.name : ''));
       if ( group != null) {
         if (result[ group[0] ] == null) {
           result[group[0]] = {};
@@ -113,7 +113,7 @@ class FilterRatingOutlook extends FilterComponent {
 
   _getRgbaBackground (rgbColor){
     if (rgbColor != null) {
-      return "rgba(" + rgbColor.r + "," + rgbColor.g + "," + rgbColor.b + ", 0.1)";
+      return 'rgba(' + rgbColor.r + ',' + rgbColor.g + ',' + rgbColor.b + ', 0.1)';
     }
   }
 
@@ -180,7 +180,7 @@ class FilterRatingOutlook extends FilterComponent {
       if (group.values.length == 1) {
         return (
             <li key={group.name}>
-              <ul className="filter__dropdown-group">
+              <ul className='filter__dropdown-group'>
                 {values}
               </ul>
             </li>
@@ -189,7 +189,7 @@ class FilterRatingOutlook extends FilterComponent {
       else {
         return (
             <li key={group.name}>
-              <ul className="filter__dropdown-group" style={_style(group)}>
+              <ul className='filter__dropdown-group' style={_style(group)}>
                 <FilterListItemRatingAll
                     key={group.name}
                     id={`${group.name}-${index}`}
@@ -237,12 +237,12 @@ class FilterRatingOutlook extends FilterComponent {
     var groupsList = this._getRatingGroupList();
 
     return (
-      <div className="filter__dropdown-menu">
-        <div className="filter__dropdown-section filter__dropdown-section_ratings">
-          <ul className="filter__dropdown-list">
+      <div className='filter__dropdown-menu'>
+        <div className='filter__dropdown-section filter__dropdown-section_ratings'>
+          <ul className='filter__dropdown-list'>
             <FilterListItemAll
-              key="All ratings"
-              name="All ratings"
+              key='All ratings'
+              name='All ratings'
               values={this.props.rating.values || []}
               onChange={ (values) => {
                 this.props.rating.values = values;
@@ -251,11 +251,11 @@ class FilterRatingOutlook extends FilterComponent {
             {groupsList}
           </ul>
         </div>
-        <div className="filter__dropdown-section filter__dropdown-section_outlook">
-          <ul className="filter__dropdown-list">
+        <div className='filter__dropdown-section filter__dropdown-section_outlook'>
+          <ul className='filter__dropdown-list'>
             <FilterListItemAll
-              key="All outlook"
-              name="All outlook"
+              key='All outlook'
+              name='All outlook'
               values={this.props.outlook.values || []}
               onChange={ (values) => {
                 this.props.outlook.values = values;

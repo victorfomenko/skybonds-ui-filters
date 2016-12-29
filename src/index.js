@@ -2,10 +2,11 @@ import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import UIFilters from './UIFilters';
-require('../vendors.css');
-require('../main.css');
 require('./style/layout.sass');
 require('./style/filter.sass');
+
+//Added for loader testing. Please remove before publishing into skybonds-ui project to avoid redundancy
+require('./style/loading-cover.sass');
 
 const rootEl = document.getElementById('root');
 var state = {
@@ -248,9 +249,36 @@ var state = {
         {name: 'convertible'}
       ]
     },
-    duration: {
-      from: '',
-      to: ''
+    range: {
+      values: [
+        {name: 'price', values:[], selected: false},
+        {name: 'spread', values:['-0.0761987536', '0.062201319'], selected: false},
+        {name: 'yield', values:[], selected: false},
+        {name: 'duration', values:[], selected: false},
+        {name: 'maturity', values:['0.0821917808', '50.2465753425'], selected: false},
+        {name: 'discount', values:[], selected: false}
+      ],
+      sortStrategy: (a,b) => {
+        var order;
+        console.log(a, b);
+        a = (String(a.name)).toUpperCase();
+        b = (String(b.name)).toUpperCase();
+        order = {
+          'YIELD': 100,
+          'PRICE': 90,
+          'SPREAD': 80,
+          'DURATION': 70,
+          'MATURITY': 60,
+          'DISCOUNT': 50,
+        };
+        if (order[a] > order[b]) {
+          return -1;
+        }
+        if (order[a] < order[b]) {
+          return 1;
+        }
+        return 0;
+      }
     },
     portfolio: {
       values: [

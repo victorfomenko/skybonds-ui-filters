@@ -111,7 +111,9 @@ class FilterSector extends FilterComponent {
 
 FilterSector.propTypes = {
   domInt: React.PropTypes.object.isRequired,
-  corporations: React.PropTypes.object.isRequired
+  corporations: React.PropTypes.object.isRequired,
+  financial: React.PropTypes.object.isRequired,
+  government: React.PropTypes.object.isRequired
 };
 
 export default FilterSector

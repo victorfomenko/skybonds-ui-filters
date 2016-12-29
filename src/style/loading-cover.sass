@@ -1,0 +1,93 @@
+.loading-cover
+  width: 100%
+  height: 100%
+  position: fixed
+  top: 0
+  left: 0
+  background-color: #fff
+  z-index: 9999
+  margin-top: 22px
+
+.loading-cover.loading-cover-full
+  margin-top: 0
+
+.loading-cover.dynamic-cover
+  position: absolute
+  margin-top: 0
+  opacity: .85
+  z-index: 500
+
+.loading-cover.error-cover
+  display: block !important
+
+.loading-cover.error-cover .spinner
+  display: none
+
+.loading-cover.error-cover .loading-caption
+  color: #800
+
+.loading-cover.error-cover .loading-caption .error
+  color: #800
+
+.loading-cover.error-cover .loading-message-container
+  width: 350px
+  font-size: 14px
+
+.loading-cover .loading-message-container
+  position: relative
+  top: 50%
+  transform: translateY(-50%)
+  width: 200px
+  max-width: 100%
+  margin: auto
+
+.loading-cover .loading-caption
+  font: Arial 12px
+  color: #367fc4
+  text-align: center
+  font-weight: bold
+  margin-bottom: 10px
+
+  &:empty
+    display: none
+
+.loading-cover .spinner
+  margin: 0 auto
+  width: 70px
+  text-align: center
+
+.loading-cover .spinner > div
+  width: 10px
+  height: 10px
+  margin: 0 3px
+  background-color: #367fc4
+  border-radius: 100%
+  display: inline-block
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out
+  animation: bouncedelay 1.4s infinite ease-in-out
+  -webkit-animation-fill-mode: both
+  animation-fill-mode: both
+
+.loading-cover .spinner .bounce1
+  -webkit-animation-delay: -0.32s
+  animation-delay: -0.32s
+
+.loading-cover .spinner .bounce2
+  -webkit-animation-delay: -0.16s
+  animation-delay: -0.16s
+
+@-webkit-keyframes bouncedelay
+  0%, 80%, 100%
+    -webkit-transform: scale(0)
+
+  40%
+    -webkit-transform: scale(1)
+
+@keyframes bouncedelay
+  0%, 80%, 100%
+    transform: scale(0)
+    -webkit-transform: scale(0)
+
+  40%
+    transform: scale(1)
+    -webkit-transform: scale(1)
