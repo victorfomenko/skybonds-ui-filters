@@ -7,7 +7,8 @@ class FilterRangeInput extends Component {
     this.state = {
       'value': defaultValue,
       'isActive': false,
-      'defaultValue': defaultValue
+      'defaultValue': defaultValue,
+      'isChanged': (props.isChanged || false)
     };
   }
 
@@ -23,10 +24,10 @@ class FilterRangeInput extends Component {
   componentWillReceiveProps(props){
     var defaultValue = this.initDefaultValue(props);
     this.setState({
-      'value': defaultValue,
+      'value': (this.state.isChanged) ? this.state.value: defaultValue,
       'isActive': false,
       'defaultValue': defaultValue
-    })
+    });
   }
 
 
@@ -69,28 +70,36 @@ class FilterRangeInput extends Component {
   resetRange() {
     this.setState({
       'value': this.state.defaultValue,
+      'isChanged': false
+    }, function() {
+      this.props.callbackMethod(this.props.index, this.props.rangeType, this.state.defaultValue, false);
     });
-    this.props.callbackMethod(this.props.index, this.props.rangeType, this.state.defaultValue);
   }
 
   deactivateRange(event) {
-    var value = (event.target.value ? parseFloat(event.target.value) : event.target.value);
-    this.props.callbackMethod(this.props.index, this.props.rangeType, this.state.value);
+    var value = (event.target.value ? parseFloat(event.target.value) : this.state.defaultValue);
     this.setState({
       'value': value,
-      'isActive': false
+      'isActive': false,
+    }, function() {
+      if(this.state.isChanged){
+        this.props.callbackMethod(this.props.index, this.props.rangeType, value, true);
+      }
     });
   }
 
   handleChange(event) {
     var value = event.target.value;
-    this.setState({'value': value});
+    this.setState({
+      'value': value,
+      'isChanged': true
+    });
   }
 
 
   render() {
     var closeIcon;
-    if(this.state.defaultValue != this.state.value) {
+    if(this.state.isChanged) {
       closeIcon = <a className='close-icon' href='javascript:void(0)' onClick={this.resetRange.bind(this)}>✕</a>;
     }
     return (

@@ -251,16 +251,15 @@ var state = {
     },
     range: {
       values: [
-        {name: 'price', values:[], selected: false},
-        {name: 'spread', values:['-0.0761987536', '0.062201319'], selected: false},
-        {name: 'yield', values:[], selected: false},
-        {name: 'duration', values:[], selected: false},
-        {name: 'maturity', values:['0.0821917808', '50.2465753425'], selected: false},
-        {name: 'discount', values:[], selected: false}
+        {name: 'price', values:["2","3"], defaultValues:['1', '100'], selected: true},
+        {name: 'spread', values:[], defaultValues:[], selected: false},
+        {name: 'yield', values:[], defaultValues:[], selected: false},
+        {name: 'duration', values:[], defaultValues:[], selected: false},
+        {name: 'maturity', values:[], defaultValues:[], selected: false},
+        {name: 'discount', values:[], defaultValues:[], selected: false}
       ],
       sortStrategy: (a,b) => {
         var order;
-        console.log(a, b);
         a = (String(a.name)).toUpperCase();
         b = (String(b.name)).toUpperCase();
         order = {

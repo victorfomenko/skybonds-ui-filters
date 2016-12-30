@@ -7,27 +7,10 @@ class FilterRange extends FilterComponent {
   constructor(props) {
     super(props);
     this.initValues(props.range);
-    this.state = {
-      'filtersLoaded': false
-    };
   }
 
   componentWillReceiveProps(props){
     this.initValues(props.range);
-  }
-
-  selectInitialRanges(){
-    const {range} = this.props;
-    if(!this.state.filtersLoaded) {
-      range.values.map((item, index) => {
-         range.values[index].selected = true;
-      });
-      this.state = {
-        'filtersLoaded': true
-      };
-      this.props.range.onFilterOpen(range);
-      this.props.onChange(range);
-    }
   }
 
   _mapLabels(value){
@@ -56,26 +39,33 @@ class FilterRange extends FilterComponent {
     return value
   }
 
-  rangeValueChanged(index, rangeType, value) {
-    var {range} = this.props;
+
+  rangeValueChanged(index, rangeType, value, isChanged) {
+    var range = this.props.range.values[index];
     if(rangeType == 'min') {
-      range.values[index].values[0] = value;
+      range.values[0] = (isChanged) ? value : range.defaultValues[0];
+      if(!range.values[1]) {
+        range.values[1] = range.defaultValues[1];
+      }
     }
     else if(rangeType == 'max') {
-      range.values[index].values[1] = value;
+      range.values[1] = (isChanged) ? value : range.defaultValues[1];
+      if(!range.values[0]) {
+        range.values[0] = range.defaultValues[0];
+      }
     }
-
-    if(range.values[index].values[0] && range.values[index].values[1]) {
-      range.values[index].selected = true
+    if((!range.defaultValues[0] && !range.defaultValues[1])
+      && (!range.values[0] || !range.values[1])) {
+      range.selected = false;
+    }
+    else if(range.values[0] == range.defaultValues[0]
+      && range.values[1] == range.defaultValues[1]){
+      range.selected = false;
     }
     else {
-      range.values[index].selected = false
+      range.selected = true;
     }
-    this.props.onChange(range);
-  }
-
-  onMouseEnter(e) {
-    // this.selectInitialRanges();
+    this.props.onChange(this.props.range);
   }
 
   render() {
@@ -84,8 +74,11 @@ class FilterRange extends FilterComponent {
     var rangeList = ((range.values || []).map((item, index) => {
       var name = this._mapLabels(item.name);
       var format = this._mapFormats(item.name);
-      var min = (item.values[0] ? Math.round(item.values[0]) : null);
-      var max = (item.values[1] ? Math.round(item.values[1]) : null);
+
+      var defaultMin = (item.defaultValues[0] || typeof item.defaultValues[0] === 'number') ? Math.round(item.defaultValues[0]) : null;
+      var min = (item.values[0] || typeof item.values[0] === 'number') ? Math.round(item.values[0]) : defaultMin;
+      var defaultMax = (item.defaultValues[1] || typeof item.defaultValues[1] === 'number') ? Math.round(item.defaultValues[1]) : null;
+      var max = (item.values[1] || typeof item.values[1] === 'number') ? Math.round(item.values[1]) : defaultMax;
       return <li key={index} className='filter__dropdown-item range-list-item'>
               <span className='range-list-item-label'>
                 {name}
@@ -97,6 +90,7 @@ class FilterRange extends FilterComponent {
                   minValue={min}
                   maxValue={max}
                   rangeType='min'
+                  isChanged={item.selected}
                   callbackMethod={this.rangeValueChanged.bind(this)} />
               </span>
               <span className='range-list-item-value range-list-item-max'>
@@ -105,6 +99,7 @@ class FilterRange extends FilterComponent {
                   minValue={min}
                   maxValue={max}
                   rangeType='max'
+                  isChanged={item.selected}
                   callbackMethod={this.rangeValueChanged.bind(this)} />
               </span>
             </li>
@@ -130,7 +125,7 @@ class FilterRange extends FilterComponent {
                 </div>;
 
     return (
-    <div className={`filter ${this._isDisabled() ? 'filter_disabled' : ''} ${this._isSelected() ? 'filter_selected' : ''}`} onMouseEnter={this.onMouseEnter.bind(this)}>
+    <div className={`filter ${this._isDisabled() ? 'filter_disabled' : ''} ${this._isSelected() ? 'filter_selected' : ''}`}>
       <div className='filter__container'>
         <button type='button' className='filter__button'>
           <span className='filter__name'>Min...Max</span>
