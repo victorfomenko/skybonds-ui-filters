@@ -144,14 +144,14 @@ class UIFilters extends Component {
             }
           }
         />
-        <FilterRange
-          range={this.state.filters.range || {}}
-          onChange={(range) => {
-              this.props.filters.range = range;
-              this.setState({filters: this.props.filters})
-            }
-          }
-        />
+        {/*<FilterRange*/}
+          {/*range={this.state.filters.range || {}}*/}
+          {/*onChange={(range) => {*/}
+              {/*this.props.filters.range = range;*/}
+              {/*this.setState({filters: this.props.filters})*/}
+            {/*}*/}
+          {/*}*/}
+        {/*/>*/}
         <FilterPortfolio
           portfolio={this.state.filters.portfolio || {}}
           onChange={ (portfolio) => {
