@@ -251,7 +251,7 @@ var state = {
     },
     range: {
       values: [
-        {name: 'price', values:["2","3"], defaultValues:['1', '100'], selected: true},
+        {name: 'price', values:['2','3'], defaultValues:['1', '100'], selected: true},
         {name: 'spread', values:[], defaultValues:[], selected: false},
         {name: 'yield', values:[], defaultValues:[], selected: false},
         {name: 'duration', values:[], defaultValues:[], selected: false},
