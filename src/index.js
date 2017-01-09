@@ -251,11 +251,11 @@ var state = {
     },
     range: {
       values: [
-        {name: 'price', values:['2','3'], defaultValues:['1', '100'], selected: true},
-        {name: 'spread', values:[], defaultValues:[], selected: false},
-        {name: 'yield', values:[], defaultValues:[], selected: false},
+        {name: 'price', values:['0', '0.235'], defaultValues:['1', '100'], selected: false},
+        {name: 'spread', values:['-Infinity', '56'], defaultValues:[], selected: false},
+        {name: 'yield', values:['0.2367', 'Infinity'], defaultValues:[], selected: false},
         {name: 'duration', values:[], defaultValues:[], selected: false},
-        {name: 'maturity', values:[], defaultValues:[], selected: false},
+        {name: 'maturity', values:['2', 'Infinity'], defaultValues:['0.002739726', '34.1123287671'], selected: true},
         {name: 'discount', values:[], defaultValues:[], selected: false}
       ],
       sortStrategy: (a,b) => {

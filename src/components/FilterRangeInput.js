@@ -24,7 +24,7 @@ class FilterRangeInput extends Component {
   componentWillReceiveProps(props){
     var defaultValue = this.initDefaultValue(props);
     this.setState({
-      'value': (this.state.isChanged) ? this.state.value: defaultValue,
+      'value': defaultValue,
       'isActive': false,
       'defaultValue': defaultValue
     });

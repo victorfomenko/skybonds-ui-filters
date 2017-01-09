@@ -42,30 +42,44 @@ class FilterRange extends FilterComponent {
 
   rangeValueChanged(index, rangeType, value, isChanged) {
     var range = this.props.range.values[index];
-    if(rangeType == 'min') {
-      range.values[0] = (isChanged) ? value : range.defaultValues[0];
-      if(!range.values[1]) {
-        range.values[1] = range.defaultValues[1];
-      }
+    var minValue = this.processRangeValue(range.values[0], range.defaultValues[0]);
+    var maxValue = this.processRangeValue(range.values[1], range.defaultValues[1]);
+    range.selected = true;
+
+    switch(rangeType) {
+      case 'min':
+        minValue = isChanged ? value.toString() : range.defaultValues[0];
+        break;
+      case 'max':
+        maxValue = isChanged ? value.toString() : range.defaultValues[1];
+        break;
     }
-    else if(rangeType == 'max') {
-      range.values[1] = (isChanged) ? value : range.defaultValues[1];
-      if(!range.values[0]) {
-        range.values[0] = range.defaultValues[0];
-      }
-    }
-    if((!range.defaultValues[0] && !range.defaultValues[1])
-      && (!range.values[0] || !range.values[1])) {
-      range.selected = false;
-    }
-    else if(range.values[0] == range.defaultValues[0]
-      && range.values[1] == range.defaultValues[1]){
-      range.selected = false;
-    }
-    else {
-      range.selected = true;
-    }
+    range.values[0] = minValue || Number.NEGATIVE_INFINITY;
+    range.values[1] = maxValue || Number.POSITIVE_INFINITY;
+
+    const haveNoValues = !minValue && !maxValue;
+    const valuesEqualDefaults = minValue == range.defaultValues[0] && maxValue == range.defaultValues[1];
+    if(haveNoValues || valuesEqualDefaults) { range.selected = false; }
     this.props.onChange(this.props.range);
+  }
+
+  processRangeValue(value, defaultValue){
+    if(!defaultValue && typeof defaultValue !== 'number') {
+      defaultValue = null;
+    }
+    if(!value && typeof value !== 'number') {
+      value = defaultValue;
+    }
+    if(value == Number.POSITIVE_INFINITY || value == Number.NEGATIVE_INFINITY) {
+      value = defaultValue;
+    }
+    return value;
+  }
+
+  roundValue(value) {
+    if(value) {
+      return Math.round(value);
+    }
   }
 
   render() {
@@ -75,10 +89,8 @@ class FilterRange extends FilterComponent {
       var name = this._mapLabels(item.name);
       var format = this._mapFormats(item.name);
 
-      var defaultMin = (item.defaultValues[0] || typeof item.defaultValues[0] === 'number') ? Math.round(item.defaultValues[0]) : null;
-      var min = (item.values[0] || typeof item.values[0] === 'number') ? Math.round(item.values[0]) : defaultMin;
-      var defaultMax = (item.defaultValues[1] || typeof item.defaultValues[1] === 'number') ? Math.round(item.defaultValues[1]) : null;
-      var max = (item.values[1] || typeof item.values[1] === 'number') ? Math.round(item.values[1]) : defaultMax;
+      var min = this.roundValue(this.processRangeValue(item.values[0], item.defaultValues[0]));
+      var max = this.roundValue(this.processRangeValue(item.values[1], item.defaultValues[1]));
       return <li key={index} className='filter__dropdown-item range-list-item'>
               <span className='range-list-item-label'>
                 {name}
