@@ -96,6 +96,14 @@ class FilterRange extends FilterComponent {
       var maxChanged = this.isValueChanged(item.values[1]);
       var min = this.roundValue(this.processRangeValue(item.values[0], item.defaultValues[0]));
       var max = this.roundValue(this.processRangeValue(item.values[1], item.defaultValues[1]));
+      switch (name) {
+        case 'Spread':
+          if(max > 100000){max = 100000}
+          break;
+        case 'Yield':
+          if(max > 1000){max = 1000}
+          break;
+      }
       return <li key={index} className='filter__dropdown-item range-list-item'>
               <span className='range-list-item-label'>
                 {name}

@@ -252,8 +252,8 @@ var state = {
     range: {
       values: [
         {name: 'price', values:['0', '0.235'], defaultValues:['1', '100']},
-        {name: 'spread', values:['-Infinity', '56'], defaultValues:[]},
-        {name: 'yield', values:['0.2367', 'Infinity'], defaultValues:[]},
+        {name: 'spread', values:['-Infinity', '56'], defaultValues:['-842.73','3257163902.44']},
+        {name: 'yield', values:[], defaultValues:['-60.03','7.743331102333809e+43']},
         {name: 'duration', values:[], defaultValues:['1','2']},
         {name: 'maturity', values:['2', 'Infinity'], defaultValues:['0.002739726', '34.1123287671']},
         {name: 'discount', values:[], defaultValues:[]}
