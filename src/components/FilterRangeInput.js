@@ -47,8 +47,7 @@ class FilterRangeInput extends Component {
 
 
   onKeyPress(e){
-    if (e.which != 46 && e.which != 45 && e.which != 46 &&
-      !(e.which >= 48 && e.which <= 57)) {
+    if (e.which === 47 || !(e.which >= 44 && e.which <= 57)) {
       e.preventDefault();
     }
     if(e.which == 13) {
@@ -77,7 +76,8 @@ class FilterRangeInput extends Component {
   }
 
   deactivateRange(event) {
-    var value = (event.target.value ? parseFloat(event.target.value) : this.state.defaultValue);
+    var targetValue = parseFloat(event.target.value.replace(/,/gi,'.'));
+    var value = (targetValue ? targetValue : this.state.defaultValue);
     this.setState({
       'value': value,
       'isActive': false,

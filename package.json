@@ -1,12 +1,11 @@
 {
   "name": "@skybonds/ui-filters",
-  "version": "0.2.9",
+  "version": "0.2.21",
   "description": "React based filter component",
   "scripts": {
     "start": "node server.js",
-    "build": "NODE_ENV=production webpack --config=webpack.build.config.js --progress --profile --colors",
-    "publish": "npm run lint && npm run build && npm publish",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "build": "npm run lint && NODE_ENV=production webpack --config=webpack.build.config.js --progress --profile --colors"
   },
   "repository": {
     "type": "git",

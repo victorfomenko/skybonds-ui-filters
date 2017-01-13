@@ -29,10 +29,10 @@ class FilterRange extends FilterComponent {
   _mapFormats(value){
     const formats = {
       'yield': '%',
-      'spread': '%',
+      'spread': 'BPS',
       'price': '%',
-      'duration': '',
-      'maturity': '',
+      'duration': 'YRS',
+      'maturity': 'YRS',
       'discount': '%'
     };
     if(formats[value] != null) { return formats[value] }
@@ -67,18 +67,22 @@ class FilterRange extends FilterComponent {
     if(!defaultValue && typeof defaultValue !== 'number') {
       defaultValue = null;
     }
-    if(!value && typeof value !== 'number') {
-      value = defaultValue;
-    }
-    if(value == Number.POSITIVE_INFINITY || value == Number.NEGATIVE_INFINITY) {
+    if(!this.isValueChanged(value)) {
       value = defaultValue;
     }
     return value;
   }
 
+  isValueChanged(value) {
+    if(!value && typeof value !== 'number' || (value == Number.POSITIVE_INFINITY || value == Number.NEGATIVE_INFINITY)) {
+      return false;
+    }
+    return true;
+  }
+
   roundValue(value) {
     if(value) {
-      return Math.round(value);
+      return Math.round(value * 100) / 100;
     }
   }
 
@@ -88,7 +92,8 @@ class FilterRange extends FilterComponent {
     var rangeList = ((range.values || []).map((item, index) => {
       var name = this._mapLabels(item.name);
       var format = this._mapFormats(item.name);
-
+      var minChanged = this.isValueChanged(item.values[0]);
+      var maxChanged = this.isValueChanged(item.values[1]);
       var min = this.roundValue(this.processRangeValue(item.values[0], item.defaultValues[0]));
       var max = this.roundValue(this.processRangeValue(item.values[1], item.defaultValues[1]));
       return <li key={index} className='filter__dropdown-item range-list-item'>
@@ -102,7 +107,7 @@ class FilterRange extends FilterComponent {
                   minValue={min}
                   maxValue={max}
                   rangeType='min'
-                  isChanged={item.selected}
+                  isChanged={minChanged}
                   callbackMethod={this.rangeValueChanged.bind(this)} />
               </span>
               <span className='range-list-item-value range-list-item-max'>
@@ -111,7 +116,7 @@ class FilterRange extends FilterComponent {
                   minValue={min}
                   maxValue={max}
                   rangeType='max'
-                  isChanged={item.selected}
+                  isChanged={maxChanged}
                   callbackMethod={this.rangeValueChanged.bind(this)} />
               </span>
             </li>

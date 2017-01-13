@@ -251,12 +251,12 @@ var state = {
     },
     range: {
       values: [
-        {name: 'price', values:['0', '0.235'], defaultValues:['1', '100'], selected: false},
-        {name: 'spread', values:['-Infinity', '56'], defaultValues:[], selected: false},
-        {name: 'yield', values:['0.2367', 'Infinity'], defaultValues:[], selected: false},
-        {name: 'duration', values:[], defaultValues:[], selected: false},
-        {name: 'maturity', values:['2', 'Infinity'], defaultValues:['0.002739726', '34.1123287671'], selected: true},
-        {name: 'discount', values:[], defaultValues:[], selected: false}
+        {name: 'price', values:['0', '0.235'], defaultValues:['1', '100']},
+        {name: 'spread', values:['-Infinity', '56'], defaultValues:[]},
+        {name: 'yield', values:['0.2367', 'Infinity'], defaultValues:[]},
+        {name: 'duration', values:[], defaultValues:['1','2']},
+        {name: 'maturity', values:['2', 'Infinity'], defaultValues:['0.002739726', '34.1123287671']},
+        {name: 'discount', values:[], defaultValues:[]}
       ],
       sortStrategy: (a,b) => {
         var order;
