@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/victorfomenko/skybonds-ui-filters.git"
+    "url": "git+https://github.com/Sovcombank/skybonds-ui-filters.git"
   },
   "keywords": [
     "react",
@@ -46,9 +46,9 @@
   },
   "dependencies": {},
   "bugs": {
-    "url": "https://github.com/victorfomenko/skybonds-ui-filters/issues"
+    "url": "https://github.com/Sovcombank/skybonds-ui-filters/issues"
   },
-  "homepage": "https://github.com/victorfomenko/skybonds-ui-filters#readme",
+  "homepage": "https://github.com/Sovcombank/skybonds-ui-filters#readme",
   "main": "index.js",
   "license": "ISC"
 }
