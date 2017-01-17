@@ -10,6 +10,10 @@ module.exports = {
     library: '',
     libraryTarget: 'commonjs2'
   },
+  externals: {
+    "react": "React",
+    "react-dom": "ReactDOM"
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
@@ -17,7 +21,6 @@ module.exports = {
       }
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin(),
   ],
