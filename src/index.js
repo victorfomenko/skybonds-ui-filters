@@ -2,6 +2,7 @@ import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import UIFilters from './UIFilters';
+require('../node_modules/@skybonds/ui-styles/style.css');
 require('./style/layout.sass');
 require('./style/filter.sass');
 
