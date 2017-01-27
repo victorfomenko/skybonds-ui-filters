@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FilterListItemAbstract from '../components/abstract/FilterListItemAbstract';
+import style from '../style/filter.sass';
 
 class FilterListItem extends FilterListItemAbstract {
   constructor(props) {
@@ -8,17 +9,17 @@ class FilterListItem extends FilterListItemAbstract {
 
   render() {
     return (
-        <li className={`filter__dropdown-item ${this.props.className}`}>
-          <div className="filter__dropdown-link">
-            <input className="filter__dropdown-checkbox"
+        <li className={`${style.filter__dropdownItem} ${this.props.className}`}>
+          <div className={style.filter__dropdownLink}>
+            <input className={style.filter__dropdownCheckbox}
                    type="checkbox"
                    onChange={this._onChange}
                    id={this.props.id}
                    checked={this.props.selected ? 'checked' : ''}
             />
-            <label className={`filter__dropdown-label ${this.props.disabled ? 'filter__dropdown-label_disabled' : '' }`} htmlFor={this.props.id}>
+            <label className={`${style.filter__dropdownLabel} ${this.props.disabled ? style.filter__dropdownLabel_disabled : '' }`} htmlFor={this.props.id}>
               <span>{this.props.name}</span>
-              <span className="filter__dropdown-tag">{this.props.tag}</span>
+              <span className={style.filter__dropdownTag}>{this.props.tag}</span>
             </label>
           </div>
         </li>

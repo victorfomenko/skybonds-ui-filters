@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import style from '../style/filter.sass';
 
 class FilterRangeInput extends Component {
   constructor(props) {
@@ -100,12 +101,12 @@ class FilterRangeInput extends Component {
   render() {
     var closeIcon;
     if(this.state.isChanged) {
-      closeIcon = <a className='close-icon' href='javascript:void(0)' onClick={this.resetRange.bind(this)}>✕</a>;
+      closeIcon = <a className={style.closeIcon} href='javascript:void(0)' onClick={this.resetRange.bind(this)}>✕</a>;
     }
     return (
       <span>
         <input
-          className={(this.state.isActive ? 'active' : '')}
+          className={`${this.state.isActive ? style.active : ''}`}
           type='text'
           name={this.props.rangeType +'_'+ this.props.index}
           value={this.state.value}

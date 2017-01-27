@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FilterComponent from '../components/FilterComponent';
 import FilterListItem from '../components/FilterListItem';
 import FilterListItemAll from '../components/FilterListItemAll';
+import style from '../style/filter.sass';
 
 
 class FilterIndustry extends FilterComponent {
@@ -9,7 +10,7 @@ class FilterIndustry extends FilterComponent {
     super(props);
     this.initValues(props.industry);
     this.initFilterName('Industry');
-    this.prefixName = 'filters_industry';
+    this.prefixName = style.filters_industry;
   }
 
 
@@ -24,7 +25,7 @@ class FilterIndustry extends FilterComponent {
       'Sovereign'
     ];
     if (industryBoldList.indexOf(name) != -1 ){
-      return 'filter__dropdown-item_highlighted'
+      return style.filter__dropdownItem_highlighted
     }
   }
 
@@ -47,7 +48,7 @@ class FilterIndustry extends FilterComponent {
     });
 
     return (
-      <ul className="filter__dropdown-menu">
+      <ul className={style.filter__dropdownMenu}>
         <FilterListItemAll
           key="All industries"
           name="All industries"
@@ -58,7 +59,7 @@ class FilterIndustry extends FilterComponent {
           }} />
 
         <li>
-          <ul className="filter__dropdown-columns">
+          <ul className={style.filter__dropdownColumns}>
             {countriesList}
           </ul>
         </li>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FilterComponent from '../components/FilterComponent';
 import FilterListItem from '../components/FilterListItem';
-
+import style from '../style/filter.sass';
 
 class FilterPortfolio extends FilterComponent {
   constructor(props) {
@@ -32,7 +32,7 @@ class FilterPortfolio extends FilterComponent {
     });
     if((portfolio.values || []).length > 0) {
       portfolioWrapper =
-        <div className="filter__container filter__container_single">
+        <div className={`${style.filter__container} ${style.filter__container_single}`}>
           <ul>
             {portfolioList}
           </ul>
@@ -42,7 +42,7 @@ class FilterPortfolio extends FilterComponent {
     }
 
     return (
-      <div className={`${portfolioList.length > 0 ? 'filter' : ''} ${this._isSelected() ? 'filter_selected' : ''}`}>
+      <div className={`${portfolioList.length > 0 ? style.filter : ''} ${this._isSelected() ? style.filter_selected : ''}`}>
         {portfolioWrapper}
       </div>
     )

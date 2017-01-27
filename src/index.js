@@ -1,13 +1,13 @@
 import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UIFilters from './UIFilters';
+import Root from './containers/Root';
 require('../node_modules/@skybonds/ui-styles/style.css');
-require('./style/layout.sass');
-require('./style/filter.sass');
+// require('./style/layout.sass');
+// require('./style/filter.sass');
 
 //Added for loader testing. Please remove before publishing into skybonds-ui project to avoid redundancy
-require('./style/loading-cover.sass');
+// require('./style/loading-cover.sass');
 
 const rootEl = document.getElementById('root');
 var state = {
@@ -289,19 +289,19 @@ var state = {
 };
 ReactDOM.render(
   <AppContainer>
-    <UIFilters filters={state.filters} onStateChange={(state) => {console.log(state)} } />
+    <Root filters={state.filters} onStateChange={(state) => {console.log(state)} } />
   </AppContainer>,
   rootEl
 );
 
 if (module.hot) {
-  module.hot.accept('./UIFilters', () => {
+  module.hot.accept('./containers/Root', () => {
     // If you use Webpack 2 in ES modules mode, you can
     // use <App /> here rather than require() a <NextApp />.
-    const NextApp = require('./UIFilters').default;
+    const NextRoot = require('./containers/Root').default;
     ReactDOM.render(
       <AppContainer>
-         <NextApp filters={state.filters} onStateChange={(state) => {console.log(state)} } />
+         <NextRoot filters={state.filters} onStateChange={(state) => {console.log(state)} } />
       </AppContainer>,
       rootEl
     );

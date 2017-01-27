@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FilterComponent from '../components/FilterComponent';
 import FilterListItem from '../components/FilterListItem';
 import FilterListItemAll from '../components/FilterListItemAll';
+import style from '../style/filter.sass';
 
 
 class FilterType extends FilterComponent {
@@ -37,7 +38,7 @@ class FilterType extends FilterComponent {
         name={name}
         id={`country-${item.name}-${index}`}
         selected={item.selected}
-        className={`filter__dropdown-item_${item.name}`}
+        className={style[`filter__dropdown-item_${item.name}`]}
         disabled={item.disabled}
         tag={item.tag}
         onChange={ (value) => {
@@ -46,7 +47,7 @@ class FilterType extends FilterComponent {
         }} />
     });
     return (
-      <ul className="filter__dropdown-menu">
+      <ul className={style.filter__dropdownMenu}>
         <FilterListItemAll
           key="All types"
           name="All types"

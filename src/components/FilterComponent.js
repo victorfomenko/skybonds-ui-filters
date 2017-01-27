@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import style from '../style/filter.sass';
 
 export default class FilterComponent extends Component {
 
@@ -78,14 +79,14 @@ export default class FilterComponent extends Component {
 
   render(){
     return(
-      <div className={`filter ${this._isDisabled() ? 'filter_disabled' : ''} ${this._isSelected() ? 'filter_selected' : ''} ${this.prefixName}`}>
-        <div className="filter__container">
-          <button type="button" className="filter__button">
-            <span className="filter__name">{this._getFilterName()}</span>
-            <span className="filter__caret" />
+      <div className={`${style.filter} ${this._isDisabled() ? style.filter_disabled : ''} ${this._isSelected() ? style.filter_selected : ''} ${this.prefixName}`}>
+        <div className={style.filter__container}>
+          <button type="button" className={style.filter__button}>
+            <span className={style.filter__name}>{this._getFilterName()}</span>
+            <span className={style.filter__caret} />
           </button>
-          <div className="filter__dropdown">
-            <div className="filter__dropdown-content">
+          <div className={style.filter__dropdown}>
+            <div className={style.filter__dropdownContent}>
               {this.content && this.content()}
             </div>
           </div>

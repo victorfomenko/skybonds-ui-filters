@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import FilterListItemAllAbstract from '../components/abstract/FilterListItemAllAbstract';
+import style from '../style/filter.sass';
+
 
 class FilterListItemRatingAll extends FilterListItemAllAbstract {
     constructor(props) {
@@ -46,7 +48,6 @@ class FilterListItemRatingAll extends FilterListItemAllAbstract {
             }
         });
         return condition1 && condition2 && this.props.values.length > 0
-
     }
 
     _toggleAll(toggleTo){
@@ -64,17 +65,17 @@ class FilterListItemRatingAll extends FilterListItemAllAbstract {
 
     render() {
         return (
-            <li className="filter__dropdown-item filter__dropdown-item_all" onMouseOver={this._onMouseOver} onMouseOut={this._onMouseOut}>
-                <div className="filter__dropdown-link">
-                    <input className="filter__dropdown-checkbox"
+            <li className={`${style.filter__dropdownItem} ${style.filter__dropdownItem_all}`} onMouseOver={this._onMouseOver} onMouseOut={this._onMouseOut}>
+                <div className={style.filter__dropdownLink}>
+                    <input className={style.filter__dropdownCheckbox}
                            onChange={this._onChange}
                            type="checkbox"
                            id={this.props.name}
                            checked={this._isAllChecked() ? 'checked' : ''}
                     />
-                    <label style={this._style()} className={`filter__dropdown-label ${this._isDisabled() ? 'filter__dropdown-label_disabled' : '' }`} htmlFor={this.props.name}>
+                    <label style={this._style()} className={`${style.filter__dropdownLabel} ${this._isDisabled() ? style.filter__dropdownLabel_disabled : '' }`} htmlFor={this.props.name}>
                         <span>{this.props.name}</span>
-                        <span className="filter__dropdown-tag">{this.props.tag}</span>
+                        <span className={style.filter__dropdownTag}>{this.props.tag}</span>
                     </label>
                 </div>
             </li>

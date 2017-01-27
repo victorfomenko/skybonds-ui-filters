@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FilterComponent from '../components/FilterComponent';
 import FilterListItem from '../components/FilterListItem';
+import style from '../style/filter.sass';
 
 class FilterSector extends FilterComponent {
   constructor(props) {
@@ -96,13 +97,13 @@ class FilterSector extends FilterComponent {
     });
 
     return (
-      <ul className="filter__dropdown-menu">
+      <ul className={style.filter__dropdownMenu}>
         {domIntList}
-        <li className="filter__dropdown-divider"/>
+        <li className={style.filter__dropdownDivider}/>
         {corporationsList}
-        <li className="filter__dropdown-divider"/>
+        <li className={style.filter__dropdownDivider}/>
         {financialList}
-        <li className="filter__dropdown-divider"/>
+        <li className={style.filter__dropdownDivider}/>
         {governmentList}
       </ul>
     );

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FilterComponent from '../components/FilterComponent';
 import FilterRangeInput from '../components/FilterRangeInput';
+import style from '../style/filter.sass';
 
 
 class FilterRange extends FilterComponent {
@@ -104,12 +105,12 @@ class FilterRange extends FilterComponent {
           if(max > 1000){max = 1000}
           break;
       }
-      return <li key={index} className='filter__dropdown-item range-list-item'>
-              <span className='range-list-item-label'>
+      return <li key={index} className={`${style.filter__dropdownItem} ${style.rangeListItem}`}>
+              <span className={style.rangeListItemLabel}>
                 {name}
-                <span className='range-list-item-sublabel'>{format}</span>
+                <span className={style.rangeListItemSublabel}>{format}</span>
               </span>
-              <span className='range-list-item-value range-list-item-min'>
+              <span className={`${style.rangeListItemValue} ${style.rangeListItemMin}`}>
                 <FilterRangeInput
                   index={index}
                   minValue={min}
@@ -118,7 +119,7 @@ class FilterRange extends FilterComponent {
                   isChanged={minChanged}
                   callbackMethod={this.rangeValueChanged.bind(this)} />
               </span>
-              <span className='range-list-item-value range-list-item-max'>
+              <span className={`${style.rangeListItemValue} ${style.rangeListItemMax}`}>
                 <FilterRangeInput
                   index={index}
                   minValue={min}
@@ -130,36 +131,36 @@ class FilterRange extends FilterComponent {
             </li>
     }));
 
-    var rangeHeader = <li key='header' className='range-list-header'>
-      <span className='range-list-header-label'></span>
-      <span className='range-list-header-min'>Min</span>
-      <span className='range-list-header-max'>Max</span>
+    var rangeHeader = <li key='header' className={style.rangeListHeader}>
+      <span className={style.rangeListHeaderLabel}/>
+      <span className={style.rangeListHeaderMin}>Min</span>
+      <span className={style.rangeListHeaderMax}>Max</span>
     </li>;
 
-    var loader = <div className='loading-cover dynamic-cover'>
-                  <div className='loading-message-container'>
-                      <div className='loading-caption'>
+    var loader = <div className={`${style.loadingCover} ${style.dynamicCover}`}>
+                  <div className={style.loadingMessageContainer}>
+                      <div className={style.loadingCaption}>
                           <span className='ng-scope'>Loading filters</span>
                       </div>
-                      <div className='spinner'>
-                          <div className='bounce1'></div>
-                          <div className='bounce2'></div>
-                          <div className='bounce3'></div>
+                      <div className={style.spinner}>
+                          <div className={style.bounce1}></div>
+                          <div className={style.bounce2}></div>
+                          <div className={style.bounce3}></div>
                       </div>
                   </div>
                 </div>;
 
     return (
-    <div className={`filter ${this._isDisabled() ? 'filter_disabled' : ''} ${this._isSelected() ? 'filter_selected' : ''}`}>
-      <div className='filter__container'>
-        <button type='button' className='filter__button'>
-          <span className='filter__name'>Min...Max</span>
-          <span className='filter__caret'></span>
+    <div className={`${style.filter} ${this._isDisabled() ? style.filter_disabled : ''} ${this._isSelected() ? style.filter_selected : ''}`}>
+      <div className={style.filter__container}>
+        <button type='button' className={style.filter__button}>
+          <span className={style.filter__name}>Min...Max</span>
+          <span className={style.filter__caret}/>
         </button>
-        <div className={`${this.props.range.showLoader ? 'filter__dropdown range-dropdown empty' : 'filter__dropdown range-dropdown'}`}>
-          <div className='filter__dropdown-content range-dropdown-content'>
+        <div className={this.props.range.showLoader ? `${style.filter__dropdown} ${style.range-dropdown} ${style.empty}` : `${style.filter__dropdown} ${style.rangeDropdown}`}>
+          <div className={`${style.filter__dropdownContent} ${style.rangeDropdownContent}`}>
             {loader}
-            <ul className='filter__dropdown-menu range-list'>
+            <ul className={`${style.filter__dropdownMenu} ${style.rangeList}`}>
               {rangeHeader}
               {rangeList}
             </ul>

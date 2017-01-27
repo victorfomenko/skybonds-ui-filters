@@ -5,13 +5,14 @@ import FilterListItemRating from '../components/FilterListItemRating';
 import FilterListItemAll from '../components/FilterListItemAll';
 import FilterListItemRatingAll from '../components/FilterListItemRatingAll';
 import {ConvertToRGB} from '../helpers/ConvertToRGB';
+import style from '../style/filter.sass';
 
 class FilterRatingOutlook extends FilterComponent {
   constructor(props) {
     super(props);
     this.initValues(props.rating, props.outlook);
     this.initFilterName('Rating & Outlook');
-    this.prefixName = 'filters_rating';
+    this.prefixName = style.filters_rating;
     this.state = { groupHover: '' }
   }
 
@@ -180,7 +181,7 @@ class FilterRatingOutlook extends FilterComponent {
       if (group.values.length == 1) {
         return (
             <li key={group.name}>
-              <ul className='filter__dropdown-group'>
+              <ul className={style.filter__dropdownGroup}>
                 {values}
               </ul>
             </li>
@@ -189,7 +190,7 @@ class FilterRatingOutlook extends FilterComponent {
       else {
         return (
             <li key={group.name}>
-              <ul className='filter__dropdown-group' style={_style(group)}>
+              <ul className={style.filter__dropdownGroup} style={_style(group)}>
                 <FilterListItemRatingAll
                     key={group.name}
                     id={`${group.name}-${index}`}
@@ -237,9 +238,9 @@ class FilterRatingOutlook extends FilterComponent {
     var groupsList = this._getRatingGroupList();
 
     return (
-      <div className='filter__dropdown-menu'>
-        <div className='filter__dropdown-section filter__dropdown-section_ratings'>
-          <ul className='filter__dropdown-list'>
+      <div className={style.filter__dropdownMenu}>
+        <div className={`${style.filter__dropdownSection} ${style.filter__dropdownSection_ratings}`}>
+          <ul className={style.filter__dropdownList}>
             <FilterListItemAll
               key='All ratings'
               name='All ratings'
@@ -251,8 +252,8 @@ class FilterRatingOutlook extends FilterComponent {
             {groupsList}
           </ul>
         </div>
-        <div className='filter__dropdown-section filter__dropdown-section_outlook'>
-          <ul className='filter__dropdown-list'>
+        <div className={`${style.filter__dropdownSection} ${style.filter__dropdownSection_outlook}`}>
+          <ul className={style.filter__dropdownList}>
             <FilterListItemAll
               key='All outlook'
               name='All outlook'

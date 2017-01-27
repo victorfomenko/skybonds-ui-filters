@@ -1,8 +1,11 @@
+@import "~@skybonds/ui-styles/styles/common/variables"
+@import "~@skybonds/ui-styles/styles/common/mixins/dropdown-shadow"
+
 .filter
-  display: flex
   margin-left: 1px
-  flex: 1 1
-  width: calc(90% / 8)
+  flex-grow: 1
+  width: calc(100% / 9)
+  max-width: 200px
 
   &:hover:not(.filter_disabled)
     .filter__dropdown
@@ -14,7 +17,7 @@
   &.filter_disabled
     .filter__name,
     .filter__button
-      color: #999999 !important
+      color: $colorMuted !important
       cursor: default !important
 
     .filter__container
@@ -29,11 +32,9 @@
   margin: 0
   background-color: rgba(0, 0, 0, 0.07)
 
-  &:hover:not(.filter__container_single)
-    background-color: rgba(0, 0, 0, 0.14)
-
+  &:hover
     .filter__name
-      color: rgb(255, 110, 126)
+      color: $colorLoudHover
   &.filter__container_single
     padding: 3px 0 3px
     & ul
@@ -43,13 +44,21 @@
       padding: 0
       & .filter__dropdown-label
         text-transform: capitalize
+        text-overflow: ellipsis
+        overflow: hidden
         &:hover
           background: none
+    &:hover
+      .filter__dropdown-label
+        color: $colorLoudHover
+
 
 .filter__button
   padding: 4px 25px 4px 10px
   font-size: 12px
   width: 100%
+  text-align: left
+  white-space: nowrap
   background: none
   border: none
   box-shadow: none
@@ -65,7 +74,7 @@
   overflow: hidden
   text-overflow: ellipsis
   white-space: nowrap
-  width: 100%
+  max-width: 100%
   text-align: left
 
 
@@ -73,31 +82,45 @@
   display: inline-block
   width: 0
   height: 0
-  margin-left: 2px
+  margin-left: 4px
+  color: lighten($colorText, 20%)
   border-top: 4px solid
   border-right: 4px solid transparent
   border-left: 4px solid transparent
-  position: absolute
-  top: 50%
-  right: 12px
-  margin-top: -2px
+  margin-top: -3px
   vertical-align: middle
 
+.filter__container
+  &:hover
+    .filter__caret
+      color: $colorLoudHover
 
 
 .filter__dropdown
   display: none
   position: absolute
   top: 100%
-  z-index: 1000
-  background-color: #fff
-  border: 1px solid rgba(0,0,0,0.15)
-  border-radius: 4px
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1)
-  background-clip: padding-box
+  padding-top: 3px
+  min-width: 100%
   &:hover
     display: block
 
+.filter:last-child
+  .filter__dropdown
+    right: 0
+  .filter__dropdown-content
+    &:before
+      left: auto
+      right: 10px
+
+
+.filter__dropdown-content
+  position: relative
+  padding: 5px 0
+  background-color: $colorWhite
+  border: 1px solid rgba(0,0,0,0.15)
+  border-radius: 3px
+  @include dropdownShadow
   &:before
     content: ""
     position: absolute
@@ -106,21 +129,17 @@
     width: 10px
     height: 10px
     border-style: solid
-    border-color: #CCCCCC
+    border-color: $colorBorder
     border-width: 1px 0 0 1px
     border-radius: 3px 0 0 0
-    background-color: #FFFFFF
+    background-color: $colorWhite
     -webkit-transform: rotate(45deg)
     transform: rotate(45deg)
 
-.filter__dropdown-content
-  max-height: 500px
-  padding: 5px 0
-  overflow-y: auto
 
 .filter__dropdown-item
   display: block
-  padding: 0 9px 0 4px
+  padding: 0 5px
 
   &.filter__dropdown-item_all
     font-style: italic
@@ -138,7 +157,7 @@
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAeCAYAAADdGWXmAAAAAXNSR0IArs4c6QAAAzFJREFUSA3FVk1IVFEUvvfNM5F+UNu0CLIItI0681QibRE5408kbYRWaVEJtglknP4gS6fmqUgURVm4qaUQushJhWihgcyPYwlFG6FVO1Frcn7e6dxrJx0bndGZoQszZ86555zvnu+de94wluFl1T3Pa7q9xwUMzySWTfecMYC95pz/4AprMGUK7NSTmbxIKDqC+XfhZwfWVahmCmx5IfQAc+/7kz+iqqZWJRNgNpevDvOeo9wK586RtlJ/2sHqHn7dA9zoJyDOeKAgF5xCTzuN0eBCLwDbL8E4CzOuNPe3mMNCT2tlVt130gC4JIFW0Jxj7eZp0tMGZusJ7GQALyixoO9QLtwjXci00QjRiA4MCmRypE9ReVN/iybpkzb8SktlYkIAZ62UFO+U822bJbCqr/xKGayx71uOYbABpFBOI87Z9Hr6CDRlGufD37uAscMyoaRPdJ8lhj4CS6myat17lAG/Ssmwqq549NH+tsHw8mYjbwPYFJTDX1muxXQfgZCUjng/yqpdnioyJiMjwcXbAHBE+iJ9qok3d5zgkc1ilZq+2Xw83SBSMGTr9RRt5kx7tl6vBmDYSccKO912bYb0jaRihIMvsZMO4IjJhwgfqe+epUkdN+byM0+WEcXuW72j/soK7X5c53VGHMiKm2ziUoaM4JvGx7PiHRR3zc3zm3i4YrGJUyKEoikRfZRIGW23PEIKdTKgNM8v/RrseAf/XIvaHm+xweAG+XKFd45fK/tIeiIpG2S0XbuOp3xFzvjgayamfH9fE8IuwKOCPmBZ0o8z37Fys4tikpESDP8jwME8uIAVjlEQAp63unx3SJ+c8tqRZk3okj5gCbuPYknKEUNKg/55909Yeo+6mWwKVy4idZPo6McDZEs757fGHZp8IZJfMpIupPQddhQt7lBy6vHkcxRsgPEUgYYICPe8VRWWtc+YXBPKmMrIu1YPFEYgPIH6XrIJKejjJlUbtZd8WmtP9ndMZRTkdpR8UU3KacweJJuQONfvbhdIxMcFExtuu+UDZ8pZbJqo0FOhT8SLtSGY2BxzWIaxnCvYrctI35a7T+TY8rJ2+0u3HPS/A34Dq5APlSVR/j0AAAAASUVORK5CYII=')
 
   &:hover > .filter__dropdown-checkbox:checked+.filter__dropdown-label:before
-    border-color: rgba(68,136,204,.5)
+    border-color: transparentize($colorLink,.5)
 
 
 .filter__dropdown-checkbox
@@ -151,8 +170,8 @@
 
 .filter__dropdown-label
   display: block
-  padding: 5px 18px 5px 4px
-  height: calc(14px + 10px)
+  padding: 5px
+  height: 24px
   border-radius: 3px
 
   &:hover
@@ -160,12 +179,14 @@
 
   &:before
     content: ''
+    display: inline-block
+    position: relative
+    top: 1px
     margin: 1px 4px 0 0
     width: 11px
     height: 11px
     border-radius: 2px
     border: 1px solid rgba(51,51,51,.5)
-    display: inline-block
 
   &:after
     position: absolute
@@ -173,26 +194,27 @@
     width: 9px
     height: 10px
     top: 5px
-    left: 6px
+    left: 8px
     background-size: 100%
 
 
     background-color: transparent
 
   &.filter__dropdown-label_disabled
-    color: #999999
-
-    &:hover
+    color: $colorMuted
+    //&:hover
       background-color: transparent
 
     &:before
       border-color: rgba(133, 133, 133, 0.5)
 
 
+
+
 .filter__dropdown-tag
   display: inline-block
   font-size: 10px
-  color: #999999
+  color: $colorMuted
   white-space: nowrap
   margin-left: .4em
   &:empty
@@ -206,16 +228,7 @@
   height: 1px
   margin: 9px 0
   overflow: hidden
-  background-color: #e5e5e5
-
-.close_icon
-  padding-left: 10px
-  font-size: 18px
-  line-height: 28px
-  & a
-    color: #000000
-    text-decoration: none
-
+  background-color: $colorLightContrast
 
 .filters_rating
   .filter__dropdown-menu
@@ -225,17 +238,21 @@
   .filter__dropdown-content
     padding: 0
 
+
 .filter__dropdown-section_ratings
-  border-right: 1px solid #DCDCDC
+  border-right: 1px solid $colorLightContrast
+
 
 .filter__dropdown-section
   box-sizing: border-box
   padding: 5px 0
 
+
 .filter__dropdown-list
   display: block
   margin: 0
   padding: 0
+
 
 .filter__dropdown-section_ratings
   .filter__dropdown-item
@@ -251,125 +268,121 @@
       padding-left: 0
 
     .filter__dropdown-item:last-child
-      padding-pight: 0
+      padding-right: 0
 
-  .filter__dropdown-label
-    background: none
+    .filter__dropdown-label
+      background: none
 
 
 .filter__dropdown-columns
   column-count: 3
-  column-gap: 0px
+  column-gap: 0
 
 .filters_сurrency
-  //.filter__dropdown-columns
-  //  max-width: 240px
-
   .filter__dropdown-item_all
     display: inline-block
+    vertical-align: top
 
 .filters_industry
-  .filter__dropdown-columns
-    max-width: 670px
-
   .filter__dropdown-item_all
     display: inline-block
+    vertical-align: top
 
 .filter__dropdown-item_highlighted
-  font-weight: bold
+  .filter__dropdown-label
+    font-weight: bold
 
 .filter__dropdown-item_subord
   .filter__dropdown-label
     span:first-child:after
       content: 's'
-      margin-left: 5px
-      color: #999
-      font-weight: 400
-      font-size: 12px
-      line-height: 12px
+      margin-left: .4em
+      color: $colorMuted
 
 .filter__dropdown-item_floater
   .filter__dropdown-label
     span:first-child:after
       content: '~'
-      margin-left: 5px
-      color: #999
-      font-weight: 400
-      font-size: 12px
-      line-height: 12px
+      margin-left: .4em
+      color: $colorMuted
 
 .filter__dropdown-item_convertible
   .filter__dropdown-label
     span:first-child:after
       content: '↔'
-      margin-left: 5px
-      color: #999
-      font-weight: 400
+      margin-left: .4em
+      color: $colorMuted
+
+.range-dropdown
+  right: 0px
+  &-content
+    min-height: 200px
+    min-width: 280px
+    &:before
+      right: 20px
+      left: auto
+    .loading-cover
+      display: none
+    .range-list
+      list-style: none
       font-size: 12px
       line-height: 12px
-.range-dropdown-content
-  min-height: 200px
-  min-width: 280px
-  .loading-cover
-    display: none
-  .range-list
-    list-style: none
-    font-size: 12px
-    line-height: 12px
-    &-header
-      display: flex
-      &-label
-        display: block
-        width: 100px
-      &-min
-        text-align: right
-        padding-right: 20px
-        width: 30px
-      &-max
-        text-align: right
-        padding-right: 20px
-        width: 65px
-    &-item
-      display: flex
-      padding: 6px 0
-      &-label
-        display: block
-        width: 100px
-      &-sublabel
-        font-size: 10px
-        margin-left: 5px
-        color: #999
-      &-min
-        color: #48c
-        text-align: right
-        padding-right: 20px
-        & input
-          width: 30px
-      &-max
-        color: #48c
-        text-align: right
-        padding-right: 20px
-        & input
-          width: 65px
-      &-value
-        position: relative
-        & input, & input:focus
-          border: none
-          cursor: pointer
+      padding-top: 8px
+      &-header
+        display: flex
+        padding: 0 10px
+        &-label
+          display: block
+          width: 100px
+        &-min
           text-align: right
-          outline: none
-          text-decoration: underline
-          color: transparent
-          text-shadow: 0 0 0 #48c
-          &.active::first-line
-            background-color: #B2CEEA
-        & .close-icon
-          position: absolute
-          top: 2px
-          right: 3px
+          width: 30px
+        &-max
+          text-align: right
+          width: 85px
+      &-item
+        display: flex
+        padding: 6px 10px
+        &-label
+          display: block
+          width: 100px
+        &-sublabel
+          font-size: 10px
+          margin-left: 5px
+          color: #999
+        &-min
           color: #48c
-          text-decoration: none
-  &.empty
-    .loading-cover
-      display: block
+          text-align: right
+          padding-right: 25px
+          & input
+            width: 30px
+        &-max
+          color: #48c
+          text-align: right
+          padding-right: 25px
+          & input
+            width: 65px
+        &-value
+          position: relative
+          & input, & input:focus
+            border: none
+            cursor: pointer
+            text-align: right
+            outline: none
+            text-decoration: underline
+            color: transparent
+            text-shadow: 0 0 0 #48c
+            &:hover
+              text-shadow: 0 0 0 #3a76b1
+            &.active::first-line
+              background-color: #B2CEEA
+          & .close-icon
+            position: absolute
+            top: 2px
+            right: 12px
+            color: #48c
+            text-decoration: none
+            &:hover
+              color: $colorLoudHover
+
 

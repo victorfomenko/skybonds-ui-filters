@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FilterComponent from '../components/FilterComponent';
 import FilterListItem from '../components/FilterListItem';
 import FilterListItemAll from '../components/FilterListItemAll';
+import style from '../style/filter.sass';
 
 
 class FilterCurrency extends FilterComponent {
@@ -46,7 +47,7 @@ class FilterCurrency extends FilterComponent {
         }} />
     });
     return (
-      <ul className="filter__dropdown-menu">
+      <ul className={style.filter__dropdownMenu}>
         <FilterListItemAll
           key="All currencies"
           name="All currencies"

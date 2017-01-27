@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FilterListItemAllAbstract from '../components/abstract/FilterListItemAllAbstract';
+import style from '../style/filter.sass';
 
 class FilterListItemAll extends FilterListItemAllAbstract {
   constructor(props) {
@@ -8,19 +9,19 @@ class FilterListItemAll extends FilterListItemAllAbstract {
 
   render() {
     return (
-        <li className="filter__dropdown-item filter__dropdown-item_all">
-          <div className="filter__dropdown-link">
-            <input className="filter__dropdown-checkbox"
-                   onChange={this._onChange}
-                   type="checkbox"
-                   id={this.props.name}
-                   checked={this._isAllChecked() ? 'checked' : ''}
-            />
-            <label className={`filter__dropdown-label ${this._isDisabled() ? 'filter__dropdown-label_disabled' : '' }`} htmlFor={this.props.name}>
-              <span>{this.props.name}</span>
-            </label>
-          </div>
-        </li>
+      <li className={`${style.filter__dropdownItem} ${style.filter__dropdownItem_all}`}>
+        <div className={style.filter__dropdownLink}>
+          <input className={style.filter__dropdownCheckbox}
+                 onChange={this._onChange}
+                 type="checkbox"
+                 id={this.props.name}
+                 checked={this._isAllChecked() ? 'checked' : ''}
+          />
+          <label className={`${style.filter__dropdownLabel} ${this._isDisabled() ? style.filter__dropdownLabel_disabled : '' }`} htmlFor={this.props.name}>
+            <span>{this.props.name}</span>
+          </label>
+        </div>
+      </li>
     );
   }
 

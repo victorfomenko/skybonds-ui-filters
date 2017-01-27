@@ -8,6 +8,7 @@ import FilterLiquidity from './components/FilterLiquidity'
 import FilterType from './components/FilterType'
 import FilterRange from './components/FilterRange'
 import FilterPortfolio from './components/FilterPortfolio'
+import layout from './style/layout.sass';
 
 
 class UIFilters extends Component {
@@ -78,88 +79,121 @@ class UIFilters extends Component {
 
 
   render(){
-    return (
-      <div className="filters">
-        <FilterIndustry
-          industry={this.state.filters.industry || {}}
-          onChange={ (industry) => {
-              this.props.filters.industry = industry;
-              this.setState({filters: this.props.filters})
-            }
-          }
-        />
-        <FilterRatingOutlook
-          rating={this.state.filters.rating || {}}
-          outlook={this.state.filters.outlook || {}}
-          onChange={ ({ rating, outlook }) => {
-              if(rating) {this.props.filters.rating = rating}
-              if(outlook) {this.props.filters.outlook = outlook}
-              this.setState({filters: this.props.filters})
-            }
-          }
-        />
-        <FilterCountry
-          country={this.state.filters.country || {}}
-          onChange={ (country) => {
-              this.props.filters.country = country;
-              this.setState({filters: this.props.filters})
-            }
-          }
-        />
-        <FilterCurrency
-          currency={this.state.filters.currency || {}}
-          onChange={ (currency) => {
-              this.props.filters.currency = currency;
-              this.setState({filters: this.props.filters})
-            }
-          }
-        />
-        <FilterSector
-          domInt={this.state.filters.domInt || {}}
-          corporations={this.state.filters.corporations || {}}
-          financial={this.state.filters.financial || {}}
-          government={this.state.filters.government || {}}
-          onChange={ ({domInt, corporations, financial, government}) => {
-            if(domInt) {this.props.filters.domInt = domInt}
-            if(corporations) {this.props.filters.corporations = corporations}
-            if(financial) {this.props.filters.financial = financial}
-            if(government) {this.props.filters.government = government}
+    const filterIndustry = this.state.filters.industry ?
+      <FilterIndustry
+        industry={this.state.filters.industry || {}}
+        onChange={ (industry) => {
+          this.props.filters.industry = industry;
+          this.setState({filters: this.props.filters})
+        }
+        }
+      />
+      : null;
+
+    const filterRatingOutlook = (this.state.filters.rating || this.state.filters.outlook) ?
+      <FilterRatingOutlook
+        rating={this.state.filters.rating || {}}
+        outlook={this.state.filters.outlook || {}}
+        onChange={ ({ rating, outlook }) => {
+          if(rating) {this.props.filters.rating = rating}
+          if(outlook) {this.props.filters.outlook = outlook}
+          this.setState({filters: this.props.filters})
+        }
+        }
+      />
+      : null;
+
+    const filterCountry = this.state.filters.country ?
+      <FilterCountry
+        country={this.state.filters.country || {}}
+        onChange={ (country) => {
+          this.props.filters.country = country;
+          this.setState({filters: this.props.filters})
+        }
+        }
+      />
+      : null;
+
+    const filterCurrency = this.state.filters.currency ?
+      <FilterCurrency
+        currency={this.state.filters.currency || {}}
+        onChange={ (currency) => {
+          this.props.filters.currency = currency;
+          this.setState({filters: this.props.filters})
+        }
+        }
+      />
+      : null;
+    const filterSector = (this.state.filters.domInt || this.state.filters.corporations || this.state.filters.financial || this.state.filters.government) ?
+      <FilterSector
+        domInt={this.state.filters.domInt || {}}
+        corporations={this.state.filters.corporations || {}}
+        financial={this.state.filters.financial || {}}
+        government={this.state.filters.government || {}}
+        onChange={ ({domInt, corporations, financial, government}) => {
+          if(domInt) {this.props.filters.domInt = domInt}
+          if(corporations) {this.props.filters.corporations = corporations}
+          if(financial) {this.props.filters.financial = financial}
+          if(government) {this.props.filters.government = government}
+          this.setState({filters: this.props.filters})
+        }
+        }
+      />
+      : null;
+
+    const filterLiquidity = this.state.filters.liquidity ?
+      <FilterLiquidity
+        liquidity={this.state.filters.liquidity || {}}
+        onChange={ (currency) => {
+            this.props.filters.liquidity = currency;
             this.setState({filters: this.props.filters})
-            }
           }
-        />
-        <FilterLiquidity
-          liquidity={this.state.filters.liquidity || {}}
-          onChange={ (currency) => {
-              this.props.filters.liquidity = currency;
-              this.setState({filters: this.props.filters})
-            }
-          }
-        />
-        <FilterType
-          type={this.state.filters.type || {}}
-          onChange={ (currency) => {
-              this.props.filters.type = currency;
-              this.setState({filters: this.props.filters})
-            }
-          }
-        />
-        <FilterRange
-          range={this.state.filters.range || {}}
-          onChange={(range) => {
-              this.props.filters.range = range;
-              this.setState({filters: this.props.filters})
-            }
-          }
-        />
-        <FilterPortfolio
-          portfolio={this.state.filters.portfolio || {}}
-          onChange={ (portfolio) => {
-              this.props.filters.portfolio = portfolio;
-              this.setState({filters: this.props.filters})
-            }
-          }
-        />
+        }
+      />
+      : null;
+    const filterType = this.state.filters.type ?
+      <FilterType
+        type={this.state.filters.type || {}}
+        onChange={ (currency) => {
+          this.props.filters.type = currency;
+          this.setState({filters: this.props.filters})
+        }
+        }
+      />
+      : null;
+
+    const filterRange = this.state.filters.range ?
+      <FilterRange
+        range={this.state.filters.range || {}}
+        onChange={(range) => {
+          this.props.filters.range = range;
+          this.setState({filters: this.props.filters})
+        }
+        }
+      />
+      : null;
+    const filterPortfolio = this.state.filters.portfolio ?
+      <FilterPortfolio
+        portfolio={this.state.filters.portfolio || {}}
+        onChange={ (portfolio) => {
+          this.props.filters.portfolio = portfolio;
+          this.setState({filters: this.props.filters})
+        }
+        }
+      />
+      : null;
+
+    return (
+      <div className={layout.filters}>
+        {filterIndustry}
+        {filterRatingOutlook}
+        {filterCountry}
+        {filterCurrency}
+        {filterSector}
+        {filterLiquidity}
+        {filterType}
+        {filterRange}
+        {filterPortfolio}
       </div>
     );
   }
@@ -171,4 +205,4 @@ UIFilters.propTypes = {
   onStateChange: React.PropTypes.func.isRequired
 };
 
-module.exports = UIFilters;
+export default UIFilters;
