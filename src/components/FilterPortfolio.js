@@ -21,6 +21,7 @@ class FilterPortfolio extends FilterComponent {
     portfolioList = (portfolio.values || []).map((item, index) => {
       return <FilterListItem
         key={index}
+        className=""
         name={item.name}
         id={`country-${item.name}-${index}`}
         selected={item.selected}

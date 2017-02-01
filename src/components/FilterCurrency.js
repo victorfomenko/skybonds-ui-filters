@@ -25,7 +25,7 @@ class FilterCurrency extends FilterComponent {
       'EUR'
     ];
     if (currencyBoldList.indexOf(name) != -1 ){
-      return 'filter__dropdown-item_highlighted'
+      return style.filter__dropdownItem_highlighted
     }
   }
 
@@ -57,7 +57,7 @@ class FilterCurrency extends FilterComponent {
             this.props.onChange(currency);
           }} />
         <li>
-          <ul className="filter__dropdown-columns">
+          <ul className={style.filter__dropdownColumns}>
             {currenciesList}
           </ul>
         </li>
