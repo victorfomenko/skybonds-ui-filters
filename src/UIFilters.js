@@ -18,31 +18,13 @@ class UIFilters extends Component {
     this.state = {
       filters: this.props.filters || {}
     };
-    this.shouldTriggerOnStateChange = true;
-    this._initEEListners();
+    this.changeHandler = this.changeHandler.bind(this)
   }
-
-
-  _initEEListners(){
-    if(this.props.ee != null) {
-      this.props.ee.on('render', this._onEERender.bind(this))
-    }
-  }
-
-
-  _onEERender(filters={}, shouldTriggerOnStateChange = false){
-    this.shouldTriggerOnStateChange = shouldTriggerOnStateChange;
-    for (var key in filters) {
-      this.props.filters[key] = filters[key]
-    }
-    this.setState({ filters });
-  }
-
 
 
   _getSelectedValues(filterObject) {
     if (filterObject == null) { filterObject = {} }
-    var activeValues = [];
+    let activeValues = [];
     const values = filterObject.values || [];
     if(Object.prototype.toString.call(values) === '[object Array]' ) {
       values.forEach( (value) => {
@@ -56,9 +38,9 @@ class UIFilters extends Component {
 
 
   _getStateObj () {
-    var selected = {};
+    let selected = {};
     for(const key in this.state.filters){
-      var activeValues = this._getSelectedValues(this.state.filters[key]);
+      let activeValues = this._getSelectedValues(this.state.filters[key]);
       if(activeValues.length > 0) {
         selected[key] = activeValues;
       }
@@ -70,11 +52,13 @@ class UIFilters extends Component {
   }
 
 
-  componentDidUpdate(){
-    if(this.shouldTriggerOnStateChange){
-      this.props.onStateChange(this._getStateObj());
-    }
-    this.shouldTriggerOnStateChange = true;
+  componentWillReceiveProps(props){
+    this.setState({ filters: props.filters });
+  }
+
+
+  changeHandler(){
+    this.props.onStateChange(this._getStateObj());
   }
 
 
@@ -184,7 +168,7 @@ class UIFilters extends Component {
       : null;
 
     return (
-      <div className={layout.filters}>
+      <div onChange={this.changeHandler} className={layout.filters}>
         {filterIndustry}
         {filterRatingOutlook}
         {filterCountry}
@@ -200,7 +184,6 @@ class UIFilters extends Component {
 }
 
 UIFilters.propTypes = {
-  ee: React.PropTypes.object,
   filters: React.PropTypes.object.isRequired,
   onStateChange: React.PropTypes.func.isRequired
 };
