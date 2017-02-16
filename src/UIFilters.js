@@ -69,6 +69,7 @@ class UIFilters extends Component {
         onChange={ (industry) => {
           this.props.filters.industry = industry;
           this.setState({filters: this.props.filters})
+          this.changeHandler()
         }
         }
       />
@@ -93,6 +94,7 @@ class UIFilters extends Component {
         onChange={ (country) => {
           this.props.filters.country = country;
           this.setState({filters: this.props.filters})
+          this.changeHandler()
         }
         }
       />
@@ -104,6 +106,7 @@ class UIFilters extends Component {
         onChange={ (currency) => {
           this.props.filters.currency = currency;
           this.setState({filters: this.props.filters})
+          this.changeHandler()
         }
         }
       />
@@ -120,6 +123,7 @@ class UIFilters extends Component {
           if(financial) {this.props.filters.financial = financial}
           if(government) {this.props.filters.government = government}
           this.setState({filters: this.props.filters})
+          this.changeHandler()
         }
         }
       />
@@ -131,6 +135,7 @@ class UIFilters extends Component {
         onChange={ (currency) => {
             this.props.filters.liquidity = currency;
             this.setState({filters: this.props.filters})
+            this.changeHandler()
           }
         }
       />
@@ -141,6 +146,7 @@ class UIFilters extends Component {
         onChange={ (currency) => {
           this.props.filters.type = currency;
           this.setState({filters: this.props.filters})
+          this.changeHandler()
         }
         }
       />
@@ -152,6 +158,7 @@ class UIFilters extends Component {
         onChange={(range) => {
           this.props.filters.range = range;
           this.setState({filters: this.props.filters})
+          this.changeHandler()
         }
         }
       />
@@ -162,13 +169,14 @@ class UIFilters extends Component {
         onChange={ (portfolio) => {
           this.props.filters.portfolio = portfolio;
           this.setState({filters: this.props.filters})
+          this.changeHandler()
         }
         }
       />
       : null;
 
     return (
-      <div onChange={this.changeHandler} className={layout.filters}>
+      <div className={layout.filters}>
         {filterIndustry}
         {filterRatingOutlook}
         {filterCountry}

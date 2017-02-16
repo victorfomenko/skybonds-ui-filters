@@ -17,14 +17,14 @@ var state = {
         {name:'ITL'},
         {name:'NZD'},
         {name:'HUF'},
-        {name:'ILS', selected: true, tag: '123'},
+        {name:'ILS', tag: '123'},
         {name:'CLP'},
         {name:'ZAR'},
         {name:'CRC'},
         {name:'JMD'},
         {name:'TRY', disabled: true},
         {name:'KZT', tag: '1123235'},
-        {name:'DOP', tag: '1235', selected: true},
+        {name:'DOP', tag: '1235'},
         {name:'COP'},
         {name:'CAD'},
         {name:'KRW'},
@@ -59,17 +59,14 @@ var state = {
       values: [
         {
           name: 'CCC',
-          selected: true,
           color: '#ffd400'
         },
         {
           name: 'CCC+',
-          selected: true,
           color: '#ffd400'
         },
         {
           name: 'CCC-',
-          selected: true,
           color: '#ffd400',
           disabled: true
         },
@@ -145,27 +142,23 @@ var state = {
           name: 'negative'
         },
         {
-          name: 'stable',
-          selected: true
+          name: 'stable'
         },
         {
-          name: 'positive',
-          disabled: true
+          name: 'positive'
         },
       ]
     },
     country: {
       values: [
         {
-          name: 'USA',
-          selected: true
+          name: 'USA'
         },
         {
           name: 'RUS'
         },
         {
-          name: 'GBR',
-          selected: true
+          name: 'GBR'
         }
       ]
     },
@@ -258,31 +251,11 @@ var state = {
         {name: 'duration', values:[], defaultValues:['1','2']},
         {name: 'maturity', values:['2', 'Infinity'], defaultValues:['0.002739726', '34.1123287671']},
         {name: 'discount', values:[], defaultValues:[]}
-      ],
-      sortStrategy: (a,b) => {
-        var order;
-        a = (String(a.name)).toUpperCase();
-        b = (String(b.name)).toUpperCase();
-        order = {
-          'YIELD': 100,
-          'PRICE': 90,
-          'SPREAD': 80,
-          'DURATION': 70,
-          'MATURITY': 60,
-          'DISCOUNT': 50,
-        };
-        if (order[a] > order[b]) {
-          return -1;
-        }
-        if (order[a] < order[b]) {
-          return 1;
-        }
-        return 0;
-      }
+      ]
     },
     portfolio: {
       values: [
-        {name: 'Portfolio', selected: true},
+        {name: 'Portfolio'},
       ]
     }
   }
