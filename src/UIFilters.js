@@ -83,6 +83,7 @@ class UIFilters extends Component {
           if(rating) {this.props.filters.rating = rating}
           if(outlook) {this.props.filters.outlook = outlook}
           this.setState({filters: this.props.filters})
+          this.changeHandler()
         }
         }
       />
